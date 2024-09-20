@@ -1,3 +1,5 @@
+package Character_settings;
+
 public class DefensiveWeapon {
 
     String defensiveWeaponType;
