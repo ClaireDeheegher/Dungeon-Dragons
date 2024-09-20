@@ -19,10 +19,12 @@ public class Main {
 
         Character test = new Character(name, job);
 
-        System.out.println("Congrats ! Your character is valid ! Your name is "+ test.name+ " and your job is "+ test.job);
-        System.out.println("Points de vie : " +test.lifePoints);
-        System.out.println("Attaque : "+ test.strength);
-        System.out.println("Arme : " +test.offensiveWeapon);
-        System.out.println("Défense : "+ test.defensiveWeapon);
+        System.out.println("Congrats ! Your character is valid ! Your name is "+ test.getName() + " and your job is "+ test.getJob());
+        System.out.println("Points de vie : " + test.getLifePoints());
+        System.out.println("Attaque : "+ test.getStrength());
+        System.out.println("Arme : " + test.getOffensiveWeapon());
+        System.out.println("Défense : "+ test.getDefensiveWeapon());
+
+        game.mouvement(game.getBoard());
     }
 }
