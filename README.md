@@ -6,7 +6,7 @@ Bienvenue, chers aventuriers, sur ce Donjons et dragons ! Je serai votre guide d
 
 ## Version Actuelle
 
-0.0 : Création du jeu sur Java
+0.0 : Création du jeu sur Java : Création du personnage avec sa classe et ses armes
 
 ## Glossaire du jeu
 
