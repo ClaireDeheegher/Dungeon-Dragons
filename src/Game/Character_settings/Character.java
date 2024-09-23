@@ -101,4 +101,23 @@ public class Character {
     public void setDefensiveWeapon (DefensiveWeapon defensiveWeapon){
         this.defensiveWeapon = defensiveWeapon;
     }
+
+    // /////////////////////  Methods  ///////////////////// //
+
+    public String showCharacter( Character character) {
+        return "Character{" +
+                "name='" + name + '\'' +
+                ", job='" + job + '\'' +
+                ", lifePoints=" + lifePoints +
+                ", strength=" + strength +
+                ", oWeaponType='" + oWeaponType + '\'' +
+                ", oWeaponName='" + oWeaponName + '\'' +
+                ", oWeaponLevel=" + oWeaponLevel +
+                ", dWeaponType='" + dWeaponType + '\'' +
+                ", dWeaponName='" + dWeaponName + '\'' +
+                ", dWeaponLevel=" + dWeaponLevel +
+                ", offensiveWeapon=" + offensiveWeapon +
+                ", defensiveWeapon=" + defensiveWeapon +
+                '}';
+    }
 }
