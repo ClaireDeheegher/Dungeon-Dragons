@@ -14,14 +14,14 @@ public class Menu extends Game {
         System.out.println("Welcome to Dungeon and dragons!");
         System.out.println("Would you like to play again? (Y/N)");
         String answer = input.nextLine();
-        if(answer.equals("y")){
-            System.out.println("Let's create your character !");
-        }
-        if(answer.equals("n")){
-            return;
-        }
-        else {
-            System.out.println("Sorry, that is not a valid option!");
+        switch(answer) {
+            case "Y":
+                System.out.println("Let's create your character !");
+                break;
+            case "N":
+                break;
+            default:
+                System.out.println("Sorry, that is not a valid option!");
         }
     }
     public Character createCharacter(){
@@ -32,20 +32,16 @@ public class Menu extends Game {
         Character character = null;
         System.out.println("Il y a deux classes disponibles: guerrier ou magicien. Taper 1 pour devenir guerrier, 2 pour devenir magicien");
         String job = characterInput.nextLine();
-
-            if (!Objects.equals(job, "1") && !Objects.equals(job, "2")) {
-                System.out.println("Sorry, that is not a valid option!");
+            switch (job){
+                case "1":
+                    character = new Warrior(name);
+                    break;
+                case "2":
+                    character = new Magician(name);
+                    break;
+                default:
+                    System.out.println("Sorry, that is not a valid option!");
             }
-            if (job.equals("1")) {
-                character = new Warrior(name);
-
-            }
-            if (job.equals("2")) {
-                character = new Magician(name);
-
-            }
-
-
         return character;
     }
 
