@@ -4,8 +4,8 @@ public class Potion extends DefensiveWeapon {
 
     // /////////////////////  Attributes  //////////////////////// //
 
-    private String potionName;
-    private int potionLevel;
+    private String potionName = "Potion";
+    private int potionLevel = 1;
 
     // /////////////////////  Constructors  ///////////////////// //
     public Potion() {}

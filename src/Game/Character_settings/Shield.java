@@ -4,8 +4,8 @@ public class Shield extends DefensiveWeapon{
 
     // /////////////////////  Attributes  //////////////////////// //
 
-    private String shieldName;
-    private int shieldLevel;
+    private String shieldName = "Bouclier en bois pourri";
+    private int shieldLevel = 1;
 
     // /////////////////////  Constructors  ///////////////////// //
 

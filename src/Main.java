@@ -14,9 +14,9 @@ public class Main {
 
         menu.StartMenu();
         Character character = menu.createCharacter();
-        character.showCharacter(character);
+        character.showCharacter();
 
 
-        game.mouvement(game.getBoard());
+        //game.mouvement(game.getBoard());
     }
 }

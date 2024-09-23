@@ -4,8 +4,8 @@ public class Spell extends OffensiveWeapon{
 
     // /////////////////////  Attributes  //////////////////////// //
 
-    private String spellName;
-    private int spellLevel;
+    private String spellName = "Feu";
+    private int spellLevel = 1;
 
     // /////////////////////  Constructors  ///////////////////// //
 

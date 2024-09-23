@@ -4,8 +4,8 @@ public class Weapon extends OffensiveWeapon{
 
     // /////////////////////  Attributes  //////////////////////// //
 
-    private String weaponName;
-    private int weaponLevel;
+    private String weaponName = "Hache rouillée";
+    private int weaponLevel = 1;
 
     // /////////////////////  Constructors  ///////////////////// //
 

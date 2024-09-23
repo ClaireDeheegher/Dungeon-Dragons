@@ -1,6 +1,6 @@
 package Game.Character_settings;
 
-abstract class Character {
+public abstract class Character {
 
     // /////////////////////  Attributes  //////////////////////// //
 
@@ -100,7 +100,7 @@ abstract class Character {
 
     // /////////////////////  Methods  ///////////////////// //
 
-    public String showCharacter( Character character) {
+    public String toString() {
         return "Character{" +
                 "name='" + name + '\'' +
                 ", job='" + job + '\'' +
@@ -115,5 +115,9 @@ abstract class Character {
                 ", offensiveWeapon=" + offensiveWeapon +
                 ", defensiveWeapon=" + defensiveWeapon +
                 '}';
+    }
+    public void showCharacter(){
+        System.out.println("Nom : " +name);
+
     }
 }

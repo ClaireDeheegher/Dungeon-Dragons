@@ -6,8 +6,9 @@ public class Warrior extends Character {
 
     private int lifePoints = 10;
     private int strength = 10;
-    private Weapon weapon;
-    private Shield shield;
+    private String job = "Guerrier";
+    private Weapon weapon = new Weapon();
+    private Shield shield = new Shield();
 
     // /////////////////////  Constructors  ///////////////////// //
 
@@ -25,6 +26,12 @@ public class Warrior extends Character {
     public int getLifePoints() {
         return lifePoints;
     }
+
+    @Override
+    public String getJob() {
+        return job;
+    }
+
     public Shield getShield() {
         return shield;
     }
@@ -47,6 +54,11 @@ public class Warrior extends Character {
     public void setLifePoints(int lifePoints) {
         this.lifePoints = lifePoints;
     }
+
+    @Override
+    public void setJob(String job) {
+        this.job = job;
+    }
     // /////////////////////  Methods  ///////////////////// //
 
     @Override
@@ -54,8 +66,18 @@ public class Warrior extends Character {
         return "Warrior{" +
                 "lifePoints=" + lifePoints +
                 ", strength=" + strength +
+                ", job='" + job +
                 ", weapon=" + weapon +
                 ", shield=" + shield +
                 '}';
+    }
+    @Override
+    public void showCharacter() {
+        super.showCharacter();
+        System.out.println("Job : "+ job);
+        System.out.println("Points de vie : " +lifePoints);
+        System.out.println("Dégâts : " +strength);
+        System.out.println(weapon.toString());
+        System.out.println(shield.toString());
     }
 }
