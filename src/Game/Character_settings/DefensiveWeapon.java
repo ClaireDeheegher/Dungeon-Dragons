@@ -10,6 +10,10 @@ public class DefensiveWeapon {
 
     // /////////////////////  Constructor ///////////////////// //
 
+    DefensiveWeapon(){
+
+    }
+
     DefensiveWeapon(String weaponName, String weaponType, int level){
         this.defensiveWeaponLevel = level;
         this.defensiveWeaponName = weaponName;

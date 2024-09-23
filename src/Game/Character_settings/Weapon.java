@@ -1,0 +1,9 @@
+package Game.Character_settings;
+
+public class Weapon extends OffensiveWeapon{
+
+    // /////////////////////  Attributes  //////////////////////// //
+
+
+    // /////////////////////  Constructors  ///////////////////// //
+}

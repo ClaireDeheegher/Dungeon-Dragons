@@ -1,0 +1,9 @@
+package Game.Character_settings;
+
+public class Shield extends DefensiveWeapon{
+
+    // /////////////////////  Attributes  //////////////////////// //
+
+    // /////////////////////  Constructors  ///////////////////// //
+
+}
