@@ -1,6 +1,6 @@
 package Game.Character_settings;
 
-public class OffensiveWeapon {
+abstract class OffensiveWeapon {
 
     // /////////////////////  Attributes  ///////////////////// //
 

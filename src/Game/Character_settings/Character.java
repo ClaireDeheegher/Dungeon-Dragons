@@ -1,12 +1,12 @@
 package Game.Character_settings;
 
-public class Character {
+abstract class Character {
 
     // /////////////////////  Attributes  //////////////////////// //
 
     private String name = "";
     private String job= "";
-    private int lifePoints;
+    int lifePoints;
     private int strength;
     private String oWeaponType;
     private String oWeaponName;
@@ -41,8 +41,6 @@ public class Character {
                 dWeaponType = "Philtre";
                 dWeaponName = "Potion de vie";
                 dWeaponLevel = 1;
-                offensiveWeapon = new OffensiveWeapon(oWeaponName, oWeaponType, oWeaponLevel);
-                defensiveWeapon = new DefensiveWeapon(dWeaponName, dWeaponType, dWeaponLevel);
                 break;
             case "guerrier":
                 lifePoints = 10;
@@ -53,8 +51,6 @@ public class Character {
                 dWeaponType = "Bouclier";
                 dWeaponName = "Bouclier en bois";
                 dWeaponLevel = 1;
-                offensiveWeapon = new OffensiveWeapon(oWeaponName, oWeaponType, oWeaponLevel);
-                defensiveWeapon = new DefensiveWeapon(dWeaponName, dWeaponType, dWeaponLevel);
                 break;
             }
     }
