@@ -1,5 +1,7 @@
 package Game;
 
+import Game.Exceptions.PersonnageHorsPlateauException;
+
 public class Game {
 
     // /////////////////////  Attributes  ///////////////////// //
@@ -30,12 +32,20 @@ public class Game {
         for(int i = 0; i < board.length; i++){
             int dice = (int)(Math.random()*range)+1;
             deplacement+=dice;
-            if (deplacement>= board.length){
+            try {
+               outOfBounds(deplacement);
+            }
+            catch(PersonnageHorsPlateauException e){
                 System.out.println("Le dé est tombé sur "+ dice +". Vous êtes arrivé à la sortie ! Félicitations vous n'êtes pas des noobs");
                 break;
             }
             System.out.println("Vous bougez de " +dice+ " cases ! Vous tombez sur la case "+deplacement);
 
+        }
+    }
+    public void outOfBounds(int i) throws PersonnageHorsPlateauException {
+        if(i>64){
+            throw new PersonnageHorsPlateauException("Vous sortez du plateau !");
         }
     }
 

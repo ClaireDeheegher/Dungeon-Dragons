@@ -12,11 +12,11 @@ public class Main {
 
 
 
-        menu.StartMenu();
+        /*menu.StartMenu();
         Character character = menu.createCharacter();
-        character.showCharacter();
+        character.showCharacter();*/
 
 
-        //game.mouvement(game.getBoard());
+        game.mouvement(game.getBoard());
     }
 }
