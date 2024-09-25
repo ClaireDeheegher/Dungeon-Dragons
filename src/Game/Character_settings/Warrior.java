@@ -4,9 +4,6 @@ public class Warrior extends Character {
 
     // /////////////////////  Attributes  //////////////////////// //
 
-    private int lifePoints = 10;
-    private int strength = 10;
-    private String job = "Guerrier";
     private Weapon weapon = new Weapon();
     private Shield shield = new Shield();
 
@@ -14,23 +11,15 @@ public class Warrior extends Character {
 
     public Warrior(String name) {
         super(name);
+        this.setStrength(10);
+        this.setJob("Guerrier");
+        this.setLifePoints(10);
+
     }
 
     // /////////////////////  Getters  ///////////////////// //
 
-    @Override
-    public int getStrength() {
-        return strength;
-    }
-    @Override
-    public int getLifePoints() {
-        return lifePoints;
-    }
 
-    @Override
-    public String getJob() {
-        return job;
-    }
 
     public Shield getShield() {
         return shield;
@@ -46,27 +35,13 @@ public class Warrior extends Character {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-    @Override
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-    @Override
-    public void setLifePoints(int lifePoints) {
-        this.lifePoints = lifePoints;
-    }
 
-    @Override
-    public void setJob(String job) {
-        this.job = job;
-    }
     // /////////////////////  Methods  ///////////////////// //
 
     @Override
     public String toString() {
         return "Warrior{" +
                 "lifePoints=" + lifePoints +
-                ", strength=" + strength +
-                ", job='" + job +
                 ", weapon=" + weapon +
                 ", shield=" + shield +
                 '}';
@@ -74,9 +49,6 @@ public class Warrior extends Character {
     @Override
     public void showCharacter() {
         super.showCharacter();
-        System.out.println("Job : "+ job);
-        System.out.println("Points de vie : " +lifePoints);
-        System.out.println("Dégâts : " +strength);
         System.out.println(weapon.toString());
         System.out.println(shield.toString());
     }

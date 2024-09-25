@@ -118,6 +118,8 @@ public abstract class Character {
     }
     public void showCharacter(){
         System.out.println("Nom : " +name);
+        System.out.println("Points de vie : " +lifePoints);
+        System.out.println("Strength : " +strength);
 
     }
 }
