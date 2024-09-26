@@ -1,11 +1,14 @@
-package Game.Character_settings;
+package Game.Characters;
+
+import Game.Items.DefensiveEquipment.Charm;
+import Game.Items.OffensiveEquipment.Spell;
 
 public class Magician extends Character {
 
     // /////////////////////  Attributes  //////////////////////// //
 
     private Spell spell = new Spell();
-    private Potion potion = new Potion();
+    private Charm charm = new Charm();
 
     // /////////////////////  Constructors  ///////////////////// //
 
@@ -19,8 +22,8 @@ public class Magician extends Character {
     // /////////////////////  Getters  ///////////////////// //
 
 
-    public Potion getPotion() {
-        return potion;
+    public Charm getPotion() {
+        return charm;
     }
     public Spell getSpell() {
         return spell;
@@ -29,8 +32,8 @@ public class Magician extends Character {
     // /////////////////////  Setters  ///////////////////// //
 
 
-    public void setPotion(Potion potion) {
-        this.potion = potion;
+    public void setPotion(Charm charm) {
+        this.charm = charm;
     }
 
     public void setSpell(Spell spell) {
@@ -44,14 +47,14 @@ public class Magician extends Character {
     public String toString() {
         return "Magician{" +
                 ", spell=" + spell +
-                ", potion=" + potion +
+                ", potion=" + charm +
                 '}';
     }
 
     @Override
     public void showCharacter() {
         super.showCharacter();
-        System.out.println(potion.toString());
+        System.out.println(charm.toString());
         System.out.println(spell.toString());
     }
 }

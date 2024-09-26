@@ -1,14 +1,19 @@
 package Game;
 
+import Game.Characters.Magician;
+import Game.Enemies.Enemy;
 import Game.Exceptions.PersonnageHorsPlateauException;
+import Game.Items.Item;
+import Game.boardTile.BonusTile;
+import Game.boardTile.EmptyTile;
+import Game.boardTile.EnemyTile;
+import Game.boardTile.Tile;
 
 public class Game {
 
     // /////////////////////  Attributes  ///////////////////// //
 
-    private int[] board = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-            30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
-            61, 62, 63, 64};
+    private int[] board = {1, 2, 3, 4, 5};
 
     // /////////////////////  Getter  ///////////////////// //
 
@@ -24,9 +29,39 @@ public class Game {
 
     // /////////////////////  Methods  ///////////////////// //
 
+
+    ////////////////////////////////////////////  Instancing the game  ///////////////////////////////
     /**
-     * Méthode permettant de générer le déroulement du jeu
+     * Method to play the game
      */
+    public Tile checkTile(int tile){
+        Tile tileEffect = switch (tile) {
+            case 2 -> new BonusTile();
+            case 4 -> new EnemyTile();
+            default -> new EmptyTile();
+        };
+        return tileEffect;
+    }
+    public void test(int []board){
+        Magician hero = new Magician("Claire");
+        for (int j : board) {
+            Tile tile = checkTile(j);
+            if (tile instanceof BonusTile) {
+                Item item = ((BonusTile) tile).getItem();
+                System.out.println("You arrived on a bonus tile ! You open the chest and received a " + item.getName());
+            }
+            else if (tile instanceof EnemyTile) {
+                Enemy enemy = ((EnemyTile) tile).generateEnemy();
+                System.out.println("You arrived on a enemy tile ! You'll encounter a " +enemy.getEnemyName());
+                ((EnemyTile) tile).Fight(enemy, hero);
+            }
+            else {
+                System.out.println("You arrived on a empty room. Nothing will happen for now and you can rest...");
+            }
+            j++;
+        }
+    }
+
 
     public void startGame (int [] board){
         int boardTile =0;
@@ -45,10 +80,10 @@ public class Game {
         }
     }
 
-
+    ////////////////////////////////////////////////// Character moves //////////////////////////////////////
     /**
-     * Méthode permettant de générer le jet de dé et son résultat
-     * @return le résultat d'un dé
+     * Method to throw a dice and getting a random result between 1 and 6
+     * @return dice result
      */
     public int trowDice(){
         int max = 6;
@@ -59,16 +94,20 @@ public class Game {
     }
 
     /**
-     * Méthode permettant d'effecter le déplacement
-     * Appelle @throwDice() pour faire les jetées de dé
-     * @param caseBoard (case sur laquelle se trouve le personnage au moment du lancer de dé)
-     * @return le déplacement effectué par le personage
+     * Méthode allowing character move
+     * Call @throwDice()
+     * @param caseBoard
+     * @return character new tile
      */
     public int getMoving (int caseBoard, int dice1, int dice2){
         return caseBoard + dice1+dice2;
     }
 
-
+    /**
+     * Method to check if the character will get OOB upon moving
+     * @param i
+     * @throws PersonnageHorsPlateauException
+     */
     public void outOfBounds(int i) throws PersonnageHorsPlateauException {
         if(i>64){
             throw new PersonnageHorsPlateauException("Vous sortez du plateau !");

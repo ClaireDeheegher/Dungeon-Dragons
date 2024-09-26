@@ -1,48 +1,46 @@
-package Game.Character_settings;
+package Game.Items.OffensiveEquipment;
+
 
 public class Spell extends OffensiveWeapon{
 
     // /////////////////////  Attributes  //////////////////////// //
 
-    private String spellName = "Feu";
-    private int spellLevel = 1;
+
+    private int spellLevel;
+    private int spellDamage;
 
     // /////////////////////  Constructors  ///////////////////// //
 
     public Spell(){
+        this.setName("Spell");
     }
 
-    public Spell(String name,  int level){
-        this.spellName = name;
-        this.spellLevel = level;
-    }
+
 
     // /////////////////////  Getters  ///////////////////// //
 
     public int getSpellLevel() {
         return spellLevel;
     }
-    public String getSpellName() {
-        return spellName;
-    }
+    public int getSpellDamage() {return spellDamage;}
+
 
 
     // /////////////////////  Setters  ///////////////////// //
 
-    public void setSpellName(String spellName) {
-        this.spellName = spellName;
-    }
+
     public void setSpellLevel(int spellLevel) {
         this.spellLevel = spellLevel;
     }
+    public void setSpellDamage(int spellDamage) {this.spellDamage = spellDamage;}
 
     // /////////////////////  Methods  ///////////////////// //
 
     @Override
     public String toString() {
         return "Spell{" +
-                "spellName='" + spellName + '\'' +
                 ", spellLevel=" + spellLevel +
+                ", spellDamage=" + spellDamage +
                 '}';
     }
 }

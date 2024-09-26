@@ -1,4 +1,7 @@
-package Game.Character_settings;
+package Game.Characters;
+
+import Game.Items.DefensiveEquipment.Shield;
+import Game.Items.OffensiveEquipment.Weapon;
 
 public class Warrior extends Character {
 

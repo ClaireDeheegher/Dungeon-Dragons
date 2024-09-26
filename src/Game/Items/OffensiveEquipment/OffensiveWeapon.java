@@ -1,30 +1,24 @@
-package Game.Character_settings;
+package Game.Items.OffensiveEquipment;
 
-abstract class OffensiveWeapon {
+import Game.Items.Item;
+
+public abstract class OffensiveWeapon extends Item {
 
     // /////////////////////  Attributes  ///////////////////// //
 
     private String offensiveWeaponType;
-    private String offensiveWeaponName;
     private int offensiveWeaponLevel;
 
     // /////////////////////  Constructors  ///////////////////// //
 
     OffensiveWeapon(){
-
+    this.setName("");
     }
 
-    OffensiveWeapon(String weaponName, String weaponType, int level) {
-        this.offensiveWeaponLevel = level;
-        this.offensiveWeaponName = weaponName;
-        this.offensiveWeaponType = weaponType;
-    }
+
 
     // /////////////////////  Getters  ///////////////////// //
 
-    public String getOffensiveWeaponName() {
-        return offensiveWeaponName;
-    }
     public String getOffensiveWeaponType() {
         return offensiveWeaponType;
     }
@@ -34,9 +28,6 @@ abstract class OffensiveWeapon {
 
     // /////////////////////  Setters  ///////////////////// //
 
-    public void setOffensiveWeaponName(String offensiveWeaponName) {
-        this.offensiveWeaponName = offensiveWeaponName;
-    }
     public void setOffensiveWeaponType(String offensiveWeaponType) {
         this.offensiveWeaponType = offensiveWeaponType;
     }
@@ -50,7 +41,6 @@ abstract class OffensiveWeapon {
     public String toString() {
         return "OffensiveWeapon{" +
                 "offensiveWeaponType='" + offensiveWeaponType + '\'' +
-                ", offensiveWeaponName='" + offensiveWeaponName + '\'' +
                 ", offensiveWeaponLevel=" + offensiveWeaponLevel +
                 '}';
     }

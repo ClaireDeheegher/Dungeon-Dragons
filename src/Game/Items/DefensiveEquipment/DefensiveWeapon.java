@@ -1,30 +1,23 @@
-package Game.Character_settings;
+package Game.Items.DefensiveEquipment;
 
-abstract class DefensiveWeapon {
+import Game.Items.Item;
+
+public abstract class DefensiveWeapon extends Item {
 
     // /////////////////////  Attributes  ///////////////////// //
 
     private String defensiveWeaponType;
-    private String defensiveWeaponName;
     private int defensiveWeaponLevel;
 
     // /////////////////////  Constructor ///////////////////// //
 
-    DefensiveWeapon(){
-
-    }
-
-    DefensiveWeapon(String weaponName, String weaponType, int level){
-        this.defensiveWeaponLevel = level;
-        this.defensiveWeaponName = weaponName;
-        this.defensiveWeaponType = weaponType;
+    public DefensiveWeapon(){
+        this.setName("");
     }
 
     // /////////////////////  Getters  ///////////////////// //
 
-    public String getDefensiveWeaponName() {
-        return defensiveWeaponName;
-    }
+
     public String getDefensiveWeaponType() {
         return defensiveWeaponType;
     }
@@ -34,9 +27,7 @@ abstract class DefensiveWeapon {
 
     // /////////////////////  Setters  ///////////////////// //
 
-    public void setDefensiveWeaponName(String defensiveWeaponName) {
-        this.defensiveWeaponName = defensiveWeaponName;
-    }
+
     public void setDefensiveWeaponType(String defensiveWeaponType) {
         this.defensiveWeaponType = defensiveWeaponType;
     }
@@ -50,7 +41,6 @@ abstract class DefensiveWeapon {
     public String toString() {
         return "DefensiveWeapon{" +
                 "defensiveWeaponType='" + defensiveWeaponType + '\'' +
-                ", defensiveWeaponName='" + defensiveWeaponName + '\'' +
                 ", defensiveWeaponLevel=" + defensiveWeaponLevel +
                 '}';
     }

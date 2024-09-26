@@ -1,6 +1,6 @@
-package Game.Character_settings;
+package Game.Items.DefensiveEquipment;
 
-public class Shield extends DefensiveWeapon{
+public class Shield extends DefensiveWeapon {
 
     // /////////////////////  Attributes  //////////////////////// //
 

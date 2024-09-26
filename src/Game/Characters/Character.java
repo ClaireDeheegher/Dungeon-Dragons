@@ -1,4 +1,8 @@
-package Game.Character_settings;
+package Game.Characters;
+
+
+import Game.Items.DefensiveEquipment.DefensiveWeapon;
+import Game.Items.OffensiveEquipment.OffensiveWeapon;
 
 public abstract class Character {
 

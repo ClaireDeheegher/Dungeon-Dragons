@@ -1,8 +1,8 @@
 package Game;
-import Game.Character_settings.Character;
-import Game.Character_settings.Magician;
-import Game.Character_settings.Warrior;
-import java.util.Objects;
+import Game.Characters.Character;
+import Game.Characters.Magician;
+import Game.Characters.Warrior;
+
 import java.util.Scanner;
 
 public class Menu extends Game {
