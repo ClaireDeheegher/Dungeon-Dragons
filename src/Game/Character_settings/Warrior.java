@@ -41,7 +41,6 @@ public class Warrior extends Character {
     @Override
     public String toString() {
         return "Warrior{" +
-                "lifePoints=" + lifePoints +
                 ", weapon=" + weapon +
                 ", shield=" + shield +
                 '}';

@@ -43,7 +43,6 @@ public class Magician extends Character {
     @Override
     public String toString() {
         return "Magician{" +
-                "lifePoints=" + lifePoints +
                 ", spell=" + spell +
                 ", potion=" + potion +
                 '}';

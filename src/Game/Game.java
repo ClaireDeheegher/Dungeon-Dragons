@@ -24,25 +24,51 @@ public class Game {
 
     // /////////////////////  Methods  ///////////////////// //
 
-    public void mouvement(int[] board){
-        int deplacement = 0;
+    /**
+     * Méthode permettant de générer le déroulement du jeu
+     */
+
+    public void startGame (int [] board){
+        int boardTile =0;
+        for (int i = 0; i < board.length; i++) {
+            int dice1 = trowDice();
+            int dice2 = trowDice();
+            boardTile = getMoving(boardTile, dice1, dice2);
+            try {
+                outOfBounds(boardTile);
+            }
+            catch(PersonnageHorsPlateauException e){
+                System.out.println("Le dé est tombé sur "+ dice1 + " et "+dice2+". Vous êtes arrivé à la sortie ! Félicitations vous n'êtes pas des noobs");
+                break;
+            }
+            System.out.println("Les dés ont fait " +dice1+" et "+dice2+ " ! Vous tombez sur la case "+boardTile);
+        }
+    }
+
+
+    /**
+     * Méthode permettant de générer le jet de dé et son résultat
+     * @return le résultat d'un dé
+     */
+    public int trowDice(){
         int max = 6;
         int min = 1;
         int range = max - min + 1;
-        for(int i = 0; i < board.length; i++){
-            int dice = (int)(Math.random()*range)+1;
-            deplacement+=dice;
-            try {
-               outOfBounds(deplacement);
-            }
-            catch(PersonnageHorsPlateauException e){
-                System.out.println("Le dé est tombé sur "+ dice +". Vous êtes arrivé à la sortie ! Félicitations vous n'êtes pas des noobs");
-                break;
-            }
-            System.out.println("Vous bougez de " +dice+ " cases ! Vous tombez sur la case "+deplacement);
-
-        }
+        int dice = (int)(Math.random()*range)+1;
+        return dice;
     }
+
+    /**
+     * Méthode permettant d'effecter le déplacement
+     * Appelle @throwDice() pour faire les jetées de dé
+     * @param caseBoard (case sur laquelle se trouve le personnage au moment du lancer de dé)
+     * @return le déplacement effectué par le personage
+     */
+    public int getMoving (int caseBoard, int dice1, int dice2){
+        return caseBoard + dice1+dice2;
+    }
+
+
     public void outOfBounds(int i) throws PersonnageHorsPlateauException {
         if(i>64){
             throw new PersonnageHorsPlateauException("Vous sortez du plateau !");

@@ -9,6 +9,10 @@ public class Menu extends Game {
     /*
     Trouver comment stopper le programme
      */
+
+    /**
+     * méthode StartMenu permettant de lancer le jeu.
+     */
     public void StartMenu(){
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome to Dungeon and dragons!");
@@ -17,13 +21,17 @@ public class Menu extends Game {
         switch(answer) {
             case "Y":
                 System.out.println("Let's create your character !");
-                break;
             case "N":
-                break;
-            default:
-                System.out.println("Sorry, that is not a valid option!");
+                System.out.println("Goodbye ! Have a nice day !");
+                System.exit(0);
         }
     }
+
+    /**
+     * Méthode createCharacter permettant de créer un personnage.
+     * Utilise les input console pour réaliser les choix de création de personnage.
+     * Instanciation des classes enfant Magician et Warrior en fonction des inputs.
+     */
     public Character createCharacter(){
         Scanner characterInput = new Scanner(System.in);
 
