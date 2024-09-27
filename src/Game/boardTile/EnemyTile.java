@@ -49,6 +49,7 @@ public class EnemyTile extends Tile{
     }
 
     public void Fight (Enemy monster, Character hero){
+        Scanner scanner = new Scanner(System.in);
         int monsterHP = monster.getEnemyHealth();
         int monsterAtk = monster.getEnemyDamage();
         int heroHP = hero.getLifePoints();

@@ -1,6 +1,5 @@
 package Game;
 
-import Game.Characters.Magician;
 import Game.Enemies.Enemy;
 import Game.Exceptions.PersonnageHorsPlateauException;
 import Game.Items.Item;
@@ -8,12 +7,14 @@ import Game.boardTile.BonusTile;
 import Game.boardTile.EmptyTile;
 import Game.boardTile.EnemyTile;
 import Game.boardTile.Tile;
+import Game.Characters.Character;
 
 public class Game {
 
     // /////////////////////  Attributes  ///////////////////// //
 
-    private int[] board = {1, 2, 3, 4, 5};
+    private int[] board = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
 
     // /////////////////////  Getter  ///////////////////// //
 
@@ -34,18 +35,18 @@ public class Game {
     /**
      * Method to play the game
      */
-    public Tile checkTile(int tile){
+    public Tile generateTile(int tile){
+
         Tile tileEffect = switch (tile) {
             case 2 -> new BonusTile();
-            case 4 -> new EnemyTile();
+            case 3 -> new EnemyTile();
             default -> new EmptyTile();
         };
         return tileEffect;
     }
-    public void test(int []board){
-        Magician hero = new Magician("Claire");
-        for (int j : board) {
-            Tile tile = checkTile(j);
+    public void tileCheck(int boardTile, Character hero){
+
+            Tile tile = generateTile(boardTile);
             if (tile instanceof BonusTile) {
                 Item item = ((BonusTile) tile).getItem();
                 System.out.println("You arrived on a bonus tile ! You open the chest and received a " + item.getName());
@@ -58,13 +59,13 @@ public class Game {
             else {
                 System.out.println("You arrived on a empty room. Nothing will happen for now and you can rest...");
             }
-            j++;
-        }
+
     }
 
 
-    public void startGame (int [] board){
+    public void startGame (int [] board, Character hero){
         int boardTile =0;
+        int heroXP = 0;
         for (int i = 0; i < board.length; i++) {
             int dice1 = trowDice();
             int dice2 = trowDice();
@@ -77,6 +78,15 @@ public class Game {
                 break;
             }
             System.out.println("Les dés ont fait " +dice1+" et "+dice2+ " ! Vous tombez sur la case "+boardTile);
+            heroXP = heroXP+50;
+            if (heroXP >= hero.getLevelXP()){
+                hero.levelUP();
+                hero.resetLevelXP();
+                heroXP =hero.resetCharacterXP(heroXP);
+                System.out.println("Votre personnage vient de level up ! Il est désormais niveau "+hero.getLevel()+ ". Il lui faut désormais "+ hero.getLevelXP()+ " xp  monter de niveau !");
+            }
+
+
         }
     }
 

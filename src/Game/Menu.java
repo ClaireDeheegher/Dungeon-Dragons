@@ -21,9 +21,11 @@ public class Menu extends Game {
         switch(answer) {
             case "Y":
                 System.out.println("Let's create your character !");
+                break;
             case "N":
                 System.out.println("Goodbye ! Have a nice day !");
                 System.exit(0);
+                break;
         }
     }
 
@@ -51,6 +53,19 @@ public class Menu extends Game {
                     System.out.println("Sorry, that is not a valid option!");
             }
         return character;
+    }
+    public void ContinueMenu() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Do you want to go to the next turn ? ");
+        String answer = input.nextLine();
+        switch (answer){
+            case "Yes" :
+                break;
+            case "No" :
+                System.out.println("Goodbye ! Have a nice day !");
+                System.exit(0);
+        }
+
     }
 
     /*

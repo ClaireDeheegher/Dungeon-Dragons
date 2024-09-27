@@ -1,3 +1,4 @@
+import Game.Characters.Character;
 import Game.Menu;
 import Game.Game;
 
@@ -7,10 +8,10 @@ public class Main {
         Game game = new Game();
         Menu menu = new Menu();
 
-        game.test(game.getBoard());
-        /*menu.StartMenu();
+        //game.test(game.getBoard());
+        menu.StartMenu();
         Character character = menu.createCharacter();
         character.showCharacter();
-        game.startGame(game.getBoard());*/
+        game.startGame(game.getBoard(), character);
     }
 }

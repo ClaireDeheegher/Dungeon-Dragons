@@ -14,6 +14,9 @@ public abstract class Character {
     private int strength;
     private OffensiveWeapon offensiveWeapon;
     private DefensiveWeapon defensiveWeapon;
+    private int characterXP = 0;
+    private int level = 1;
+    private int levelXP = 100;
 
     // /////////////////////  Constructors  ///////////////////// //
 
@@ -44,8 +47,9 @@ public abstract class Character {
     public int getStrength(){
         return this.strength;
     }
-
-
+    public int getCharacterXP() {return characterXP;}
+    public int getLevel() {return level;}
+    public int getLevelXP() {return levelXP;}
     // /////////////////////  Setters  ///////////////////// //
 
 
@@ -61,6 +65,9 @@ public abstract class Character {
     public void setStrength(int strength) {
         this.strength = strength;
     }
+    public void setCharacterXP(int characterXP) {this.characterXP = characterXP;}
+    public void setLevel(int level) {this.level = level;}
+    public void setLevelXP(int levelXP) {this.levelXP = levelXP;}
 
 
     // /////////////////////  Methods  ///////////////////// //
@@ -71,12 +78,33 @@ public abstract class Character {
                 ", job='" + job + '\'' +
                 ", lifePoints=" + lifePoints +
                 ", strength=" + strength +
+                ", characterXP=" + characterXP +
+                ", level=" + level +
+                ", levelXP=" + levelXP +
                 '}';
     }
     public void showCharacter(){
         System.out.println("Nom : " +name);
         System.out.println("Points de vie : " +lifePoints);
         System.out.println("Strength : " +strength);
+        System.out.println("Character XP : " +characterXP);
+        System.out.println("Level : " +level);
+        System.out.println("Level XP : " +levelXP);
 
     }
+
+    public int levelUP (){
+       level++;
+       return level;
+    }
+    public int resetCharacterXP(int xp){
+        characterXP = xp;
+        characterXP -= levelXP;
+        return characterXP;
+    }
+    public int resetLevelXP(){
+        levelXP = levelXP + (int)(levelXP*0.2);
+        return levelXP;
+    }
+
 }
