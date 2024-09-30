@@ -15,6 +15,8 @@ import fr.campus.dnd.game.items.offensiveEquipment.OffensiveWeapon;
 import fr.campus.dnd.game.items.offensiveEquipment.Spell;
 import fr.campus.dnd.game.items.offensiveEquipment.Weapon;
 
+import java.util.Scanner;
+
 public class Game {
 
     // /////////////////////  Attributes  ///////////////////// //
@@ -47,7 +49,7 @@ public class Game {
         hero.levelUP();
         heroXP =hero.resetCharacterXP(heroXP);
         hero.resetLevelXP();
-        System.out.println("Votre personnage vient de level up ! Il est désormais niveau "+hero.getLevel()+ ". Il lui faut désormais "+ hero.getLevelXP()+ " xp  monter de niveau !");
+        System.out.println("Congrats ! You level up ! Your level is now "+hero.getLevel()+ ". You need "+ hero.getLevelXP()+ " xp  to level up again !");
     }
 
    public void getItemEffect(Character hero, Item item) {
@@ -67,6 +69,38 @@ public class Game {
         }
    }
 
+    public void fightMonster(Character hero, Enemy monster){
+
+        String choice ="";
+        Scanner input = new Scanner(System.in);
+
+        while (hero.getLifePoints()>0 && monster.getEnemyHealth()>0 && !choice.equals("runaway")) {
+            System.out.println("Do you want to fight ? or runaway?");
+            choice = input.nextLine();
+            switch (choice) {
+                case "runaway":
+                    flightFromFight();
+                    break;
+                case "fight" :
+                    hero.playerAttack(monster);
+                    if (monster.getEnemyHealth()<=0){
+                        hero.gainXP(monster.getXp());
+                        System.out.println("the "+monster.getEnemyName()+" is defeated ! You gained "+monster.getXp()+" xp !" );
+                        break;
+                    }
+                    System.out.println("You inflicted "+hero.getStrength()+" damage to your opponent ! It still has "+monster.getEnemyHealth()+" life points left.");
+                    hero.monsterAttack(monster);
+                    if (hero.getLifePoints()<=0){
+                        System.out.println("The "+monster.getEnemyName()+" has defeated you..... Game over");
+                        System.exit(0);
+                    }
+                    System.out.println("The "+monster.getEnemyName()+ " has inflicted "+monster.getEnemyDamage()+" damage ! You still have "+hero.getLifePoints()+" life points left.");
+                    break;
+            }
+
+        }
+
+    }
 
     ////////////////////////////////////////////  How to know the tile you're on   ///////////////////////////////
 
@@ -86,13 +120,15 @@ public class Game {
                 Item item = ((BonusTile) tile).getItem();
                 System.out.println("You arrived on a bonus tile ! You open the chest and received a " + item.getName());
                 getItemEffect(hero, item);
+                hero.gainXP(40);
             }
             else if (tile instanceof EnemyTile) {
                 Enemy enemy = ((EnemyTile) tile).generateEnemy();
                 System.out.println("You arrived on a enemy tile ! You'll encounter a " +enemy.getEnemyName());
-                ((EnemyTile) tile).Fight(enemy, hero);
+                fightMonster(hero, enemy);
             }
             else {
+                hero.gainXP(25);
                 System.out.println("You arrived on a empty room. Nothing will happen for now and you can rest...");
             }
 
@@ -101,14 +137,16 @@ public class Game {
 
 
     ////////////////////////////////////////////////// Character moves //////////////////////////////////////
-    public void playATurn (Character hero, int heroXP ){
+
+
+    public void playATurn (Character hero){
         int dice1 = throwDice();
         int dice2 = throwDice();
         boardTile = getMoving(boardTile, dice1, dice2);
         System.out.println("You roll the dices. They fall on " +dice1+" and "+dice2+ " ! You go to the tile "+boardTile);
         tileCheck(boardTile, hero);
-        if (heroXP >= hero.getLevelXP()){
-            levelUp(hero, heroXP);
+        if (hero.getCharacterXP()>= hero.getLevelXP()){
+            levelUp(hero, hero.getCharacterXP());
         }
     }
 
@@ -136,7 +174,6 @@ public class Game {
 
     /**
      * Method to check if the character will get OOB upon moving
-     * @param i
      * @throws PersonnageHorsPlateauException
      */
     public void outOfBounds() throws PersonnageHorsPlateauException {
@@ -145,6 +182,13 @@ public class Game {
         }
     }
 
+    public void flightFromFight(){
+        int max = 6;
+        int min = 1;
+        int range = max - min + 1;
+        int flight = (int)(Math.random()*range)+1;
+        boardTile -= flight;
+    }
     /////////////////////////////////////////////////// Testing methods ///////////////////////////////////////////////////
 
     public void testTurnGame (int [] board, Character hero){

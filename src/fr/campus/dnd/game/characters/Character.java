@@ -1,10 +1,13 @@
 package fr.campus.dnd.game.characters;
 
 
+import fr.campus.dnd.game.enemies.Enemy;
 import fr.campus.dnd.game.items.Item;
 import fr.campus.dnd.game.items.consumable.Potion;
 import fr.campus.dnd.game.items.defensiveEquipment.DefensiveWeapon;
 import fr.campus.dnd.game.items.offensiveEquipment.*;
+
+import java.util.Scanner;
 
 public abstract class Character {
 
@@ -87,6 +90,8 @@ public abstract class Character {
                 ", characterXP=" + characterXP +
                 ", level=" + level +
                 ", levelXP=" + levelXP +
+                ", offensiveWeapon=" + offensiveWeapon +
+                ", defensiveWeapon=" + defensiveWeapon +
                 '}';
     }
     public void showCharacter(){
@@ -96,7 +101,12 @@ public abstract class Character {
         System.out.println("Character XP : " +characterXP);
         System.out.println("Level : " +level);
         System.out.println("Level XP : " +levelXP);
+        System.out.println("Arme " +offensiveWeapon.getName());
 
+    }
+
+    public void gainXP(int xp){
+        characterXP += xp;
     }
 
     public void levelUP (){
@@ -115,7 +125,7 @@ public abstract class Character {
 
     public void switchOffensiveSpell(OffensiveWeapon item){
        if (item instanceof Fireball) {
-           if (item.getLevel()>offensiveWeapon.getLevel()) {
+           if (item.getDamage()>offensiveWeapon.getDamage()) {
            offensiveWeapon = new Fireball();
            strength += 7;
            System.out.println("You equip the Fireball and leave your former weapon to the ground before resuming your journey to the dungeon.");
@@ -125,7 +135,7 @@ public abstract class Character {
            }
        }
        if (item instanceof Thunder){
-           if (item.getLevel()>offensiveWeapon.getLevel()) {
+           if (item.getDamage()>offensiveWeapon.getDamage()) {
                offensiveWeapon = new Thunder();
                strength += 2;
                System.out.println("You equip the Thunder and leave your former weapon to the ground before resuming your journey to the dungeon.");
@@ -137,7 +147,7 @@ public abstract class Character {
     }
     public void switchOffensiveWeapon(OffensiveWeapon item){
         if (item instanceof Mace){
-            if (item.getLevel()>offensiveWeapon.getLevel()) {
+            if (item.getDamage()>offensiveWeapon.getDamage()) {
                 offensiveWeapon = new Mace();
                 strength += 3;
                 System.out.println("You equip the Mace and leave your former weapon to the ground before resuming your journey to the dungeon.");
@@ -147,7 +157,7 @@ public abstract class Character {
             }
         }
         if (item instanceof Sword){
-            if (item.getLevel()>offensiveWeapon.getLevel()) {
+            if (item.getDamage()>offensiveWeapon.getDamage()) {
                 offensiveWeapon = new Sword();
                 strength += 5;
                 System.out.println("You equip the Sword and leave your former weapon to the ground before resuming your journey to the dungeon.");
@@ -168,6 +178,20 @@ public abstract class Character {
                 System.out.println("Tou drank the small potion ! You gain 5 HP !");
                 break;
         }
+    }
+    public void playerAttack (Enemy monster){
+        int monsterHP = monster.getEnemyHealth();
+
+        monsterHP -= strength;
+        monster.setEnemyHealth(monsterHP);
+
+
+        }
+    public void monsterAttack(Enemy monster){
+
+        int monsterAtk = monster.getEnemyDamage();
+        lifePoints -= monsterAtk;
+
     }
 
 }

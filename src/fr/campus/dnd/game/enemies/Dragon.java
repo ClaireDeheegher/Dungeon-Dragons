@@ -9,6 +9,7 @@ public class Dragon extends Enemy{
         this.setEnemyName("Dragon");
         this.setEnemyHealth(15);
         this.setEnemyDamage(4);
+        this.setXp(150);
     }
 
     // /////////////////////  Getter  //////////////////////// //

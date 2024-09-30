@@ -59,9 +59,9 @@ public class Menu extends Game {
         System.out.println("Do you want to go to the next turn ? You can choose yes to continue, no to stop and character to see your stats ! ");
         String answer = input.nextLine();
         switch (answer){
-            case "Yes" :
+            case "yes" :
                 break;
-            case "No" :
+            case "no" :
                 System.out.println("Goodbye ! Have a nice day !");
                 System.exit(0);
                 break;

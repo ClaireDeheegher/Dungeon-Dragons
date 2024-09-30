@@ -10,6 +10,7 @@ public class Goblin extends Enemy{
         this.setEnemyName("Goblin");
         this.setEnemyHealth(6);
         this.setEnemyDamage(1);
+        this.setXp(50);
     }
 
     // /////////////////////  Getter  //////////////////////// //

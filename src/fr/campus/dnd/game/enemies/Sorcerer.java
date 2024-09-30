@@ -9,6 +9,7 @@ public class Sorcerer extends Enemy{
         this.setEnemyName("Sorcerer");
         this.setEnemyHealth(9);
         this.setEnemyDamage(2);
+        this.setXp(85);
     }
 
 
