@@ -15,6 +15,10 @@ public class EnemyTile extends Tile{
 
     // /////////////////////  Constructor  //////////////////////// //
     public EnemyTile () {
+
+    }
+    public EnemyTile (int x) {
+        super(x);
     }
 
     // /////////////////////  Getter  //////////////////////// //

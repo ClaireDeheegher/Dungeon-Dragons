@@ -6,7 +6,11 @@ public class EmptyTile extends Tile {
     // /////////////////////  Attributes  //////////////////////// //
 
     // /////////////////////  Constructors  //////////////////////// //
-
+    public EmptyTile() {
+    }
+    public EmptyTile(int x) {
+        super(x);
+    }
 
     // /////////////////////  Getter  //////////////////////// //
 

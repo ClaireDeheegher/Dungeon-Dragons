@@ -71,10 +71,6 @@ public class Menu extends Game {
         }
 
     }
-
-    /*
-    Lancer la partie
-     */
 }
 
 

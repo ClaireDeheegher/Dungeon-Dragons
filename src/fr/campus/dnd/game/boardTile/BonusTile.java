@@ -13,6 +13,10 @@ public class BonusTile extends Tile {
     private Item bonusItem = new Item();
     // /////////////////////  Constructors  //////////////////////// //
     public BonusTile() {
+
+    }
+    public BonusTile(int i) {
+        super(i);
     }
 
     // /////////////////////  Getter  //////////////////////// //

@@ -6,6 +6,7 @@ public class Tile {
 
     private int number;
 
+
     // /////////////////////  Constructor  //////////////////////// //
 
     public Tile() {}
@@ -19,17 +20,21 @@ public class Tile {
     public int getNumber() {
         return number;
     }
+
     // /////////////////////  Setter  //////////////////////// //
 
     public void setNumber(int number) {
         this.number = number;
     }
+
+
     // /////////////////////  Methods  //////////////////////// //
 
     @Override
     public String toString() {
         return "Tile{" +
                 "number=" + number +
+
                 '}';
     }
 }
