@@ -2,10 +2,12 @@ package fr.campus.dnd.game;
 import fr.campus.dnd.game.characters.Character;
 import fr.campus.dnd.game.characters.Magician;
 import fr.campus.dnd.game.characters.Warrior;
+import fr.campus.dnd.game.db.ConnectionDB;
 
 import java.util.Scanner;
 
 public class Menu extends Game {
+    ConnectionDB db = new ConnectionDB();
     /*
     Trouver comment stopper le programme
      */
@@ -62,6 +64,8 @@ public class Menu extends Game {
             case "yes" :
                 break;
             case "no" :
+                db.saveData( character);
+                db.checkSavedData();
                 System.out.println("Goodbye ! Have a nice day !");
                 System.exit(0);
                 break;

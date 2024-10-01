@@ -2,12 +2,9 @@ package fr.campus.dnd.game.characters;
 
 
 import fr.campus.dnd.game.enemies.Enemy;
-import fr.campus.dnd.game.items.Item;
 import fr.campus.dnd.game.items.consumable.Potion;
 import fr.campus.dnd.game.items.defensiveEquipment.DefensiveWeapon;
 import fr.campus.dnd.game.items.offensiveEquipment.*;
-
-import java.util.Scanner;
 
 public abstract class Character {
 
@@ -52,8 +49,8 @@ public abstract class Character {
     public int getStrength(){
         return this.strength;
     }
-    public DefensiveWeapon getDefensiveWeapon() {return defensiveWeapon;}
-    public OffensiveWeapon getOffensiveWeapon() {return offensiveWeapon;}
+    public String getDefensiveWeapon() {return defensiveWeapon.toString();}
+    public String getOffensiveWeapon() {return offensiveWeapon.toString();}
     public int getCharacterXP() {return characterXP;}
     public int getLevel() {return level;}
     public int getLevelXP() {return levelXP;}
