@@ -1,10 +1,7 @@
 package fr.campus.dnd.game.boardTile;
 
 import fr.campus.dnd.game.characters.Character;
-import fr.campus.dnd.game.enemies.Dragon;
-import fr.campus.dnd.game.enemies.Enemy;
-import fr.campus.dnd.game.enemies.Goblin;
-import fr.campus.dnd.game.enemies.Sorcerer;
+import fr.campus.dnd.game.enemies.*;
 
 import java.util.Scanner;
 
@@ -39,13 +36,15 @@ public class EnemyTile extends Tile{
     public Enemy generateEnemy(){
         Enemy monster = new Enemy();
         int min = 1;
-        int max = 3;
+        int max = 5;
         int range = max - min + 1;
         int generator =(int)(Math.random()*range)+1;
         monster = switch (generator) {
             case 1 -> new Goblin();
             case 2 -> new Sorcerer();
             case 3 -> new Dragon();
+            case 4 -> new Orc();
+            case 5 -> new Wraith();
             default -> monster;
         };
         return monster;

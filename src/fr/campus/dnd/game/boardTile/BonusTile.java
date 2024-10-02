@@ -1,12 +1,10 @@
 package fr.campus.dnd.game.boardTile;
 
 import fr.campus.dnd.game.items.consumable.BigPotion;
+import fr.campus.dnd.game.items.consumable.Potion;
 import fr.campus.dnd.game.items.consumable.SmallPotion;
 import fr.campus.dnd.game.items.Item;
-import fr.campus.dnd.game.items.offensiveEquipment.Fireball;
-import fr.campus.dnd.game.items.offensiveEquipment.Mace;
-import fr.campus.dnd.game.items.offensiveEquipment.Sword;
-import fr.campus.dnd.game.items.offensiveEquipment.Thunder;
+import fr.campus.dnd.game.items.offensiveEquipment.*;
 
 public class BonusTile extends Tile {
     // /////////////////////  Attributes  //////////////////////// //
@@ -34,7 +32,7 @@ public class BonusTile extends Tile {
     public Item getItem() {
         Item bonusItem = new Item();
         int min = 1;
-        int max = 6;
+        int max = 8;
         int range = max - min + 1;
         int generator =(int)(Math.random()*range)+1;
         bonusItem = switch (generator) {
@@ -44,6 +42,8 @@ public class BonusTile extends Tile {
             case 4 -> new Mace();
             case 5 -> new SmallPotion();
             case 6 -> new BigPotion();
+            case 7 -> new IronBow();
+            case 8 -> new CompoundBow();
             default -> bonusItem;
         };
         return bonusItem;

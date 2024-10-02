@@ -1,12 +1,13 @@
 package fr.campus.dnd.game;
 import fr.campus.dnd.game.characters.Character;
+import fr.campus.dnd.game.characters.Hunter;
 import fr.campus.dnd.game.characters.Magician;
 import fr.campus.dnd.game.characters.Warrior;
 import fr.campus.dnd.game.db.ConnectionDB;
 
 import java.util.Scanner;
 
-public class Menu extends Game {
+public class Menu {
     ConnectionDB db = new ConnectionDB();
     /*
     Trouver comment stopper le programme
@@ -15,7 +16,7 @@ public class Menu extends Game {
     /**
      * méthode StartMenu permettant de lancer le jeu.
      */
-    public void StartMenu(){
+    public void startMenu(){
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome to Dungeon and dragons!");
         System.out.println("Would you like to play again? (Y/N)");
@@ -39,24 +40,35 @@ public class Menu extends Game {
     public Character createCharacter(){
         Scanner characterInput = new Scanner(System.in);
 
-        System.out.println("Saisissez votre nom");
+        System.out.println("Write your name hero.");
         String name = characterInput.nextLine();
         Character character = null;
-        System.out.println("Il y a deux classes disponibles: guerrier ou magicien. Taper 1 pour devenir guerrier, 2 pour devenir magicien");
+        System.out.println("There's 3 jobs available for you : warrior(1), magician(2) or hunter(3). Put the corresponding number to get your job");
         String job = characterInput.nextLine();
             switch (job){
                 case "1":
                     character = new Warrior(name);
+                    ((Warrior) character).generateHp();
+                    ((Warrior)character).generateAtk();
                     break;
                 case "2":
                     character = new Magician(name);
+                    ((Magician) character).generateAtk();
+                    ((Magician)character).generateHp();
+                    break;
+                case "3":
+                    character = new Hunter(name);
+                    ((Hunter) character).generateAtk();
+                    ((Hunter)character).generateHp();
                     break;
                 default:
                     System.out.println("Sorry, that is not a valid option!");
             }
+        assert character != null;
+        character.showCharacter();
         return character;
     }
-    public void ContinueMenu(Character character) {
+    public void continueMenu(Character character) {
         Scanner input = new Scanner(System.in);
         System.out.println("Do you want to go to the next turn ? You can choose yes to continue, no to stop and character to see your stats ! ");
         String answer = input.nextLine();

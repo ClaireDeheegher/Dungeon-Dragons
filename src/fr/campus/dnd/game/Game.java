@@ -1,5 +1,6 @@
 package fr.campus.dnd.game;
 
+import fr.campus.dnd.game.characters.Hunter;
 import fr.campus.dnd.game.characters.Magician;
 import fr.campus.dnd.game.characters.Warrior;
 import fr.campus.dnd.game.enemies.Dragon;
@@ -14,6 +15,7 @@ import fr.campus.dnd.game.boardTile.EnemyTile;
 import fr.campus.dnd.game.boardTile.Tile;
 import fr.campus.dnd.game.characters.Character;
 import fr.campus.dnd.game.items.consumable.Potion;
+import fr.campus.dnd.game.items.offensiveEquipment.Bow;
 import fr.campus.dnd.game.items.offensiveEquipment.OffensiveWeapon;
 import fr.campus.dnd.game.items.offensiveEquipment.Spell;
 import fr.campus.dnd.game.items.offensiveEquipment.Weapon;
@@ -50,9 +52,9 @@ public class Game {
 
 
 
-    public void levelUp (Character hero, int heroXP) {
+    public void levelUp (Character hero) {
         hero.levelUP();
-        heroXP =hero.resetCharacterXP(heroXP);
+        hero.resetCharacterXP();
         hero.resetLevelXP();
         System.out.println("Congrats ! You level up ! Your level is now "+hero.getLevel()+ ". You need "+ hero.getLevelXP()+ " xp  to level up again !");
     }
@@ -63,10 +65,13 @@ public class Game {
         }
         if (item instanceof OffensiveWeapon){
             if (item instanceof Spell && hero instanceof Magician){
-                hero.switchOffensiveSpell((Spell) item);
+                hero.switchOffensiveWeapon((Spell) item);
             }
             else if (item instanceof Weapon && hero instanceof Warrior){
                 hero.switchOffensiveWeapon((Weapon) item);
+            }
+            else if (item instanceof Bow && hero instanceof Hunter){
+                hero.switchOffensiveWeapon((Bow) item);
             }
             else {
                 System.out.println("This equipment is not suitable for your class ! You throw it angrily to the ground and continue your journey !");
@@ -78,6 +83,7 @@ public class Game {
 
         String choice ="";
         Scanner input = new Scanner(System.in);
+        int bonusDamage = 0;
 
         while (hero.getLifePoints()>0 && monster.getEnemyHealth()>0 && !choice.equals("runaway")) {
             System.out.println("Do you want to fight ? or runaway?");
@@ -87,10 +93,12 @@ public class Game {
                     flightFromFight();
                     break;
                 case "fight" :
-                    hero.playerAttack(monster);
+                    bonusDamage = hero.generateBonusDamage(monster);
+                    hero.playerAttack(monster, bonusDamage);
                     if (monster.getEnemyHealth()<=0){
                         hero.gainXP(monster.getXp());
                         System.out.println("the "+monster.getEnemyName()+" is defeated ! You gained "+monster.getXp()+" xp !" );
+                        board.set(boardTile, new EmptyTile(boardTile));
                         break;
                     }
                     System.out.println("You inflicted "+hero.getStrength()+" damage to your opponent ! It still has "+monster.getEnemyHealth()+" life points left.");
@@ -134,9 +142,16 @@ public class Game {
                 board.set(boardTile, new EmptyTile(boardTile));
             } else if (tile instanceof EnemyTile) {
                 Enemy enemy = ((EnemyTile) tile).generateEnemy();
+                boolean isFriendly = enemy.checkIfFriendly(hero);
                 System.out.println("You arrived on a enemy tile ! You'll encounter a " + enemy.getEnemyName());
-                fightMonster(hero, enemy);
-                board.set(boardTile, new EmptyTile(boardTile));
+                if (isFriendly) {
+                    System.out.println("The "+enemy.getEnemyName()+" isn't interested in you. It goes away and you gain nothing to brag about.");
+                    board.set(boardTile, new EmptyTile(boardTile));
+                }
+                else {
+                    fightMonster(hero, enemy);
+                }
+
             } else {
                 hero.gainXP(25);
                 System.out.println("You arrived on a empty room. Nothing will happen for now and you can rest...");
@@ -155,7 +170,7 @@ public class Game {
             System.out.println("You roll the dices. They fall on " + dice1 + " and " + dice2 + " ! You go to the tile " + boardTile);
             tileCheck(boardTile, hero);
             if (hero.getCharacterXP() >= hero.getLevelXP()) {
-                levelUp(hero, hero.getCharacterXP());
+                levelUp(hero);
             }
         }
 
@@ -217,7 +232,7 @@ public class Game {
                 heroXP = heroXP + 50;
                 if (heroXP >= hero.getLevelXP()) {
                     hero.levelUP();
-                    heroXP = hero.resetCharacterXP(heroXP);
+                    heroXP = hero.resetCharacterXP();
                     hero.resetLevelXP();
                     System.out.println("Votre personnage vient de level up ! Il est désormais niveau " + hero.getLevel() + ". Il lui faut désormais " + hero.getLevelXP() + " xp  monter de niveau !");
                     hero.showCharacter();

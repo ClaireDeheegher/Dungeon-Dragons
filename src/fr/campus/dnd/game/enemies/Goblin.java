@@ -1,6 +1,6 @@
 package fr.campus.dnd.game.enemies;
 
-public class Goblin extends Enemy{
+public class Goblin extends Enemy implements IsFriend{
 
     // /////////////////////  Attributes  //////////////////////// //
 

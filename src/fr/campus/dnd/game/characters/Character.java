@@ -102,84 +102,57 @@ public abstract class Character {
 
     }
 
+
     public void gainXP(int xp){
         characterXP += xp;
     }
 
     public void levelUP (){
-        lifePoints = lifePoints +2;
-        strength = strength +2;
+        upStrength();
+        upHp();
         level++;
     }
-    public int resetCharacterXP(int xp){
-        characterXP = xp;
+    public int resetCharacterXP(){
         characterXP -= levelXP;
         return characterXP;
     }
     public void resetLevelXP(){
         levelXP = levelXP + (int)(levelXP*0.2);
     }
+    public void upStrength(){
+        int max = 2;
+        int min = 0;
+        int range = max - min;
+        int random = (int) (Math.random() * range);
+        strength = strength +random;
+    }
+    public void upHp(){
+        int max = 2;
+        int min = 0;
+        int range = max - min;
+        int random = (int) (Math.random() * range);
+        lifePoints = lifePoints +random;
+    }
 
-    public void switchOffensiveSpell(OffensiveWeapon item){
-       if (item instanceof Fireball) {
-           if (item.getDamage()>offensiveWeapon.getDamage()) {
-           offensiveWeapon = new Fireball();
-           strength += 7;
-           System.out.println("You equip the Fireball and leave your former weapon to the ground before resuming your journey to the dungeon.");
-           }
-           else {
-               System.out.println("You find out that this equipment is not suited for your needs. You leave it to the ground and resume your journey.");
-           }
-       }
-       if (item instanceof Thunder){
-           if (item.getDamage()>offensiveWeapon.getDamage()) {
-               offensiveWeapon = new Thunder();
-               strength += 2;
-               System.out.println("You equip the Thunder and leave your former weapon to the ground before resuming your journey to the dungeon.");
-           }
-           else {
-               System.out.println("You find out that this equipment is not suited for your needs. You leave it to the ground and resume your journey.");
-           }
-       }
-    }
     public void switchOffensiveWeapon(OffensiveWeapon item){
-        if (item instanceof Mace){
-            if (item.getDamage()>offensiveWeapon.getDamage()) {
-                offensiveWeapon = new Mace();
-                strength += 3;
-                System.out.println("You equip the Mace and leave your former weapon to the ground before resuming your journey to the dungeon.");
-            }
-            else {
-                System.out.println("You find out that this equipment is not suited for your needs. You leave it to the ground and resume your journey.");
-            }
+        if (item.getDamage()>offensiveWeapon.getDamage()){
+            strength += item.getDamage();
+            offensiveWeapon =item;
+            System.out.println("You equip the "+offensiveWeapon.getName()+ " and leave your former weapon to the ground before resuming your journey to the dungeon.");
         }
-        if (item instanceof Sword){
-            if (item.getDamage()>offensiveWeapon.getDamage()) {
-                offensiveWeapon = new Sword();
-                strength += 5;
-                System.out.println("You equip the Sword and leave your former weapon to the ground before resuming your journey to the dungeon.");
-            }
-            else {
-                System.out.println("You find out that this equipment is not suited for your needs. You leave it to the ground and resume your journey.");
-            }
+        else {
+            System.out.println("You find out that this equipment is not suited for your needs. You leave it to the ground and resume your journey.");
         }
     }
+
     public void regenHP (Potion potion){
-        switch (potion.getName()){
-            case "Small Potion":
-                lifePoints+=2;
-                System.out.println("Tou drank the small potion ! You gain 2 HP !");
-                break;
-            case "Big Potion":
-                lifePoints+=5;
-                System.out.println("Tou drank the small potion ! You gain 5 HP !");
-                break;
-        }
+        lifePoints+= potion.getRegenHP();
+        System.out.println("Tou drank the "+potion.getName()+" ! You gain "+potion.getRegenHP()+" HP !");
     }
-    public void playerAttack (Enemy monster){
+    public void playerAttack (Enemy monster, int bonusDamage){
         int monsterHP = monster.getEnemyHealth();
 
-        monsterHP -= strength;
+        monsterHP -= (strength+bonusDamage);
         monster.setEnemyHealth(monsterHP);
 
 
@@ -189,6 +162,9 @@ public abstract class Character {
         int monsterAtk = monster.getEnemyDamage();
         lifePoints -= monsterAtk;
 
+    }
+    public int generateBonusDamage(Enemy enemy){
+        return 0 ;
     }
 
 }

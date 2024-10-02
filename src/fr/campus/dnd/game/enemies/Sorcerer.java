@@ -1,6 +1,6 @@
 package fr.campus.dnd.game.enemies;
 
-public class Sorcerer extends Enemy{
+public class Sorcerer extends Enemy implements IsFriend{
     // /////////////////////  Attributes  //////////////////////// //
 
     // /////////////////////  Constructor  //////////////////////// //

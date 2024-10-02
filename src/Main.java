@@ -19,12 +19,12 @@ public class Main {
 
        ///////////////////////////////// Initialize board and character with methods ///////////////////////////////////////
 
-        menu.StartMenu();
+        menu.startMenu();
         Character character = menu.createCharacter();
         game.boardSetup();
 
         /////////////////////////////// Playing the game until the end or death //////////////////////////////////////////
-        for (int i =0; i<100; i++) {
+        while(character.getLifePoints()>0) {
 
             game.playATurn(character);
             try {
@@ -34,7 +34,7 @@ public class Main {
                 System.out.println("You arrived at the end of the dungeon ! Congrats you're not a noob :)");
                 break;
             }
-            menu.ContinueMenu(character);
+            menu.continueMenu(character);
         }
 
     }

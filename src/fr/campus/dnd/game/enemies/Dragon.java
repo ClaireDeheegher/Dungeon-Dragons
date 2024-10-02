@@ -1,6 +1,6 @@
 package fr.campus.dnd.game.enemies;
 
-public class Dragon extends Enemy{
+public class Dragon extends Enemy implements IsFriend {
     // /////////////////////  Attributes  //////////////////////// //
 
     // /////////////////////  Constructors  //////////////////////// //
@@ -10,6 +10,7 @@ public class Dragon extends Enemy{
         this.setEnemyHealth(15);
         this.setEnemyDamage(4);
         this.setXp(150);
+        this.getFriendlyJobs().add("Beast Tamer");
     }
 
     // /////////////////////  Getter  //////////////////////// //
@@ -17,4 +18,9 @@ public class Dragon extends Enemy{
     // /////////////////////  Setter  //////////////////////// //
 
     // /////////////////////  Methods  //////////////////////// //
+
+
+
+
+
 }
