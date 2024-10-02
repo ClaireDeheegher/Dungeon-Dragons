@@ -151,12 +151,22 @@ public abstract class Character {
     }
     public void playerAttack (Enemy monster, int bonusDamage){
         int monsterHP = monster.getEnemyHealth();
-
-        monsterHP -= (strength+bonusDamage);
+        int damages = calculateDamages(bonusDamage);
+        monsterHP -= damages;
         monster.setEnemyHealth(monsterHP);
 
-
         }
+    public int calculateDamages(int bonusDamage){
+        int max =6;
+        int min = 1;
+        int range = max - min+1;
+        int random = (int) (Math.random() * range)+1;
+        return switch (random) {
+            case 1 -> 0;
+            case 6 -> bonusDamage + strength + (int) ((bonusDamage + strength) * 0.5);
+            default -> bonusDamage + strength;
+        };
+    }
     public void monsterAttack(Enemy monster){
 
         int monsterAtk = monster.getEnemyDamage();
