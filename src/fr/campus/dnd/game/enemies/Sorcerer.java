@@ -1,5 +1,7 @@
 package fr.campus.dnd.game.enemies;
 
+import fr.campus.dnd.game.characters.Character;
+
 public class Sorcerer extends Enemy implements IsFriend{
     // /////////////////////  Attributes  //////////////////////// //
 
@@ -18,4 +20,9 @@ public class Sorcerer extends Enemy implements IsFriend{
     // /////////////////////  Setter  //////////////////////// //
 
     // /////////////////////  Methods  //////////////////////// //
+
+    @Override
+    public void checkIfFriendly(Character character) {
+
+    }
 }

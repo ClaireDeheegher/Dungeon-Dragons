@@ -142,9 +142,9 @@ public class Game {
                 board.set(boardTile, new EmptyTile(boardTile));
             } else if (tile instanceof EnemyTile) {
                 Enemy enemy = ((EnemyTile) tile).generateEnemy();
-                boolean isFriendly = enemy.checkIfFriendly(hero);
+                enemy.checkIfFriendly(hero);
                 System.out.println("You arrived on a enemy tile ! You'll encounter a " + enemy.getEnemyName());
-                if (isFriendly) {
+                if (enemy.getIsFriendly()) {
                     System.out.println("The "+enemy.getEnemyName()+" isn't interested in you. It goes away and you gain nothing to brag about.");
                     board.set(boardTile, new EmptyTile(boardTile));
                 }
@@ -164,10 +164,9 @@ public class Game {
 
 
         public void playATurn (Character hero){
-            int dice1 = throwDice();
-            int dice2 = throwDice();
-            boardTile = getMoving(boardTile, dice1, dice2);
-            System.out.println("You roll the dices. They fall on " + dice1 + " and " + dice2 + " ! You go to the tile " + boardTile);
+            int dice = throwDice();
+            boardTile = getMoving(boardTile, dice);
+            System.out.println("You roll the dices. They fall on " + dice +  " ! You go to the tile " + boardTile);
             tileCheck(boardTile, hero);
             if (hero.getCharacterXP() >= hero.getLevelXP()) {
                 levelUp(hero);
@@ -192,8 +191,8 @@ public class Game {
          * @param caseBoard
          * @return character new tile
          */
-        public int getMoving ( int caseBoard, int dice1, int dice2){
-            return caseBoard + dice1 + dice2;
+        public int getMoving ( int caseBoard, int dice){
+            return caseBoard + dice;
         }
 
         /**
@@ -221,14 +220,14 @@ public class Game {
             for (int i = 0; i < board.length; i++) {
                 int dice1 = throwDice();
                 int dice2 = throwDice();
-                boardTile = getMoving(boardTile, dice1, dice2);
+                boardTile = getMoving(boardTile, dice1);
                 try {
                     outOfBounds();
                 } catch (PersonnageHorsPlateauException e) {
-                    System.out.println("Le dé est tombé sur " + dice1 + " et " + dice2 + ". Vous êtes arrivé à la sortie ! Félicitations vous n'êtes pas des noobs");
+                    System.out.println("Le dé est tombé sur " + dice1 +  ". Vous êtes arrivé à la sortie ! Félicitations vous n'êtes pas des noobs");
                     break;
                 }
-                System.out.println("Les dés ont fait " + dice1 + " et " + dice2 + " ! Vous tombez sur la case " + boardTile);
+                System.out.println("Les dés ont fait " + dice1 +  " ! Vous tombez sur la case " + boardTile);
                 heroXP = heroXP + 50;
                 if (heroXP >= hero.getLevelXP()) {
                     hero.levelUP();

@@ -1,5 +1,7 @@
 package fr.campus.dnd.game.enemies;
 
+import fr.campus.dnd.game.characters.Character;
+
 public class Dragon extends Enemy implements IsFriend {
     // /////////////////////  Attributes  //////////////////////// //
 
@@ -10,7 +12,7 @@ public class Dragon extends Enemy implements IsFriend {
         this.setEnemyHealth(15);
         this.setEnemyDamage(4);
         this.setXp(150);
-        this.getFriendlyJobs().add("Beast Tamer");
+
     }
 
     // /////////////////////  Getter  //////////////////////// //
@@ -20,7 +22,8 @@ public class Dragon extends Enemy implements IsFriend {
     // /////////////////////  Methods  //////////////////////// //
 
 
+    @Override
+    public void checkIfFriendly(Character character) {
 
-
-
+    }
 }

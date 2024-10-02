@@ -3,14 +3,13 @@ package fr.campus.dnd.game.enemies;
 import java.util.ArrayList;
 import fr.campus.dnd.game.characters.Character;
 
-public class Enemy implements IsFriend {
+public class Enemy implements IsFriend{
     // /////////////////////  Attributes  //////////////////////// //
     private String enemyName;
     private int enemyHealth;
     private int enemyDamage;
     private int xp;
-    private ArrayList<String> friendlyJobs = new ArrayList<String>();
-    private boolean isFriendly;
+    private boolean isFriendly = false;
 
     // /////////////////////  Constructor  //////////////////////// //
 
@@ -32,7 +31,7 @@ public class Enemy implements IsFriend {
         return enemyDamage;
     }
     public int getXp() {return xp;}
-    public ArrayList<String> getFriendlyJobs() {return friendlyJobs;}
+
     public boolean getIsFriendly() {return isFriendly;}
 
 
@@ -48,7 +47,7 @@ public class Enemy implements IsFriend {
         this.enemyDamage = enemyDamage;
     }
     public void setXp(int xp) {this.xp = xp;}
-    public void setFriendlyJobs(ArrayList<String> friendlyJobs) {}
+
     public void setIsFriendly(boolean isFriendly) {this.isFriendly = isFriendly;}
 
     // /////////////////////  Methods  //////////////////////// //
@@ -61,15 +60,13 @@ public class Enemy implements IsFriend {
                 ", enemyHealth=" + enemyHealth +
                 ", enemyDamage=" + enemyDamage +
                 ", xp=" + xp +
-                ", friendlyJobs=" + friendlyJobs +
+
                 ", isFriendly=" + isFriendly +
                 '}';
     }
 
     @Override
-    public boolean checkIfFriendly(Character character) {
-        this.setIsFriendly(this.getFriendlyJobs().contains(character.getName()));
-        return this.getIsFriendly();
-    }
+    public void checkIfFriendly(Character character) {
 
+    }
 }
