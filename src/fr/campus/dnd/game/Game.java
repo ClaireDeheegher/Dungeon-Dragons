@@ -78,12 +78,33 @@ public class Game {
             }
         }
    }
+    public void getEmptyTileEvent(int dice, Character hero) {
+        BonusTile tile = new BonusTile();
+        switch (dice) {
+            case 1:
+                System.out.println("You happen to walk on a spiked floor. It hurts like hell ! You lose 2hp.");
+                hero.setLifePoints(hero.getLifePoints() - 2);
+                if (hero.getLifePoints()<=0){
+                    System.out.println("Game over ! You died from a trap you noob");
+                    System.exit(0);
+                }
+                break;
+            case 6 :
+                System.out.println("You saw something shiny ! You approach carefully and discover a chest !");
+                Item chest = tile.getItem();
+                getItemEffect(hero, chest);
+                break;
+            default :
+                break;
 
+        }
+    }
     public void fightMonster(Character hero, Enemy monster){
 
         String choice ="";
         Scanner input = new Scanner(System.in);
         int bonusDamage = 0;
+        int damages=0;
 
         while (hero.getLifePoints()>0 && monster.getEnemyHealth()>0 && !choice.equals("runaway")) {
             System.out.println("Do you want to fight ? or runaway?");
@@ -94,14 +115,21 @@ public class Game {
                     break;
                 case "fight" :
                     bonusDamage = hero.generateBonusDamage(monster);
+                    damages = hero.calculateDamages(bonusDamage);
                     hero.playerAttack(monster, bonusDamage);
                     if (monster.getEnemyHealth()<=0){
                         hero.gainXP(monster.getXp());
-                        System.out.println("the "+monster.getEnemyName()+" is defeated ! You gained "+monster.getXp()+" xp !" );
+                        System.out.println("You inflicted "+damages+" damages. The "+monster.getEnemyName()+" is defeated ! You gained "+monster.getXp()+" xp !" );
                         board.set(boardTile, new EmptyTile(boardTile));
                         break;
                     }
-                    System.out.println("You inflicted "+hero.getStrength()+" damage to your opponent ! It still has "+monster.getEnemyHealth()+" life points left.");
+                    else if(damages ==0){
+                        System.out.println("You tripped and failed to touch the "+monster.getEnemyName()+" ! You inflicted no damages...");
+                    }
+                    else {
+                        System.out.println("You inflicted "+damages+" damage to your opponent ! It still has "+monster.getEnemyHealth()+" life points left.");
+                    }
+
                     hero.monsterAttack(monster);
                     if (hero.getLifePoints()<=0){
                         System.out.println("The "+monster.getEnemyName()+" has defeated you..... Game over");
@@ -134,16 +162,19 @@ public class Game {
         public void tileCheck (int boardTile, Character hero){
 
             Tile tile = board.get(boardTile);
+
             if (tile instanceof BonusTile) {
                 Item item = ((BonusTile) tile).getItem();
                 System.out.println("You arrived on a bonus tile ! You open the chest and received a " + item.getName());
                 getItemEffect(hero, item);
                 hero.gainXP(40);
                 board.set(boardTile, new EmptyTile(boardTile));
+
             } else if (tile instanceof EnemyTile) {
                 Enemy enemy = ((EnemyTile) tile).generateEnemy();
                 enemy.checkIfFriendly(hero);
                 System.out.println("You arrived on a enemy tile ! You'll encounter a " + enemy.getEnemyName());
+
                 if (enemy.getIsFriendly()) {
                     System.out.println("The "+enemy.getEnemyName()+" isn't interested in you. It goes away and you gain nothing to brag about.");
                     board.set(boardTile, new EmptyTile(boardTile));
@@ -153,8 +184,11 @@ public class Game {
                 }
 
             } else {
-                hero.gainXP(25);
                 System.out.println("You arrived on a empty room. Nothing will happen for now and you can rest...");
+                hero.gainXP(25);
+                int dice = throwDice();
+                getEmptyTileEvent(dice, hero);
+
             }
 
         }
