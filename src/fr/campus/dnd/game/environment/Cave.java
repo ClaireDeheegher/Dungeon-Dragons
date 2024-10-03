@@ -1,0 +1,11 @@
+package fr.campus.dnd.game.environment;
+
+public class Cave extends Field implements FieldGeneration{
+    // /////////////////////  Attributes  //////////////////////// //
+    // /////////////////////  Constructors  ///////////////////// //
+    public Cave() {
+        this.setFieldName("Cave");
+    }
+    // /////////////////////  Getters/Setters  ///////////////////// //
+    // /////////////////////  Methods  ///////////////////// //
+}

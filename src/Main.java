@@ -1,10 +1,13 @@
+import fr.campus.dnd.game.boardTile.Tile;
 import fr.campus.dnd.game.characters.Character;
 import fr.campus.dnd.game.db.ConnectionDB;
+import fr.campus.dnd.game.environment.Field;
 import fr.campus.dnd.game.exceptions.PersonnageHorsPlateauException;
 import fr.campus.dnd.game.Menu;
 import fr.campus.dnd.game.Game;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class Main {
@@ -15,6 +18,9 @@ public class Main {
 
         Game game = new Game();
         Menu menu = new Menu();
+        Field field = new Field();
+        ArrayList<Tile> board = field.generateBoard();;
+
 
 
        ///////////////////////////////// Initialize board and character with methods ///////////////////////////////////////
@@ -22,12 +28,12 @@ public class Main {
         menu.startMenu();
         Character character = menu.createCharacter();
         character.showCharacter();
-        game.boardSetup();
+
 
         /////////////////////////////// Playing the game until the end or death //////////////////////////////////////////
         while(character.getLifePoints()>0) {
 
-            game.playATurn(character);
+            game.playATurn(character, board);
             menu.continueMenu(character);
         }
 

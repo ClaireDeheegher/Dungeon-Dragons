@@ -27,23 +27,18 @@ public class Game {
 
     // /////////////////////  Attributes  ///////////////////// //
 
-    private ArrayList<Tile> board;
+
     private int boardTile = 0;
 
     // /////////////////////  Getter  ///////////////////// //
 
-    private ArrayList<Tile> getBoard() {
-        return board;
-    }
+
     private int getBoardTile(){
         return boardTile;
     }
 
     // /////////////////////  Setter  ///////////////////// //
 
-    public void setBoard(ArrayList<Tile> board) {
-        this.board = board;
-    }
     public void setBoardTile(int boardTile) {
         this.boardTile = boardTile;
     }
@@ -59,47 +54,11 @@ public class Game {
         System.out.println("Congrats ! You level up ! Your level is now "+hero.getLevel()+ ". You need "+ hero.getLevelXP()+ " xp  to level up again !");
     }
 
-   public void getItemEffect(Character hero, Item item) {
-        if (item instanceof Potion) {
-            hero.regenHP((Potion) item);
-        }
-        if (item instanceof OffensiveWeapon){
-            if (item instanceof Spell && hero instanceof Magician){
-                hero.switchOffensiveWeapon((Spell) item);
-            }
-            else if (item instanceof Weapon && hero instanceof Warrior){
-                hero.switchOffensiveWeapon((Weapon) item);
-            }
-            else if (item instanceof Bow && hero instanceof Hunter){
-                hero.switchOffensiveWeapon((Bow) item);
-            }
-            else {
-                System.out.println("This equipment is not suitable for your class ! You throw it angrily to the ground and continue your journey !");
-            }
-        }
-   }
-    public void getEmptyTileEvent(int dice, Character hero) {
-        BonusTile tile = new BonusTile();
-        switch (dice) {
-            case 1:
-                System.out.println("You happen to walk on a spiked floor. It hurts like hell ! You lose 2hp.");
-                hero.setLifePoints(hero.getLifePoints() - 2);
-                if (hero.getLifePoints()<=0){
-                    System.out.println("Game over ! You died from a trap you noob");
-                    System.exit(0);
-                }
-                break;
-            case 6 :
-                System.out.println("You saw something shiny ! You approach carefully and discover a chest !");
-                Item chest = tile.getItem();
-                getItemEffect(hero, chest);
-                break;
-            default :
-                break;
 
-        }
+    public void getEmptyTileEvent(Character hero) {
+
     }
-    public void fightMonster(Character hero, Enemy monster){
+    public void fightMonster(Character hero, Enemy monster, ArrayList<Tile> board){
 
         String choice ="";
         Scanner input = new Scanner(System.in);
@@ -150,29 +109,19 @@ public class Game {
     }
     ////////////////////////////////////////////// Initialize the board ///////////////////////////
 
-    public void boardSetup() {
-    board = new ArrayList<>();
-        for (int i = 0; i < 64; i++) {
-            switch (i) {
-                case 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61 -> board.add(new BonusTile(i));
-                case 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63 -> board.add(new EnemyTile(i));
-                default -> board.add(new EmptyTile(i));
-            }
 
-        }
-    }
 
         ////////////////////////////////////////////  How to know the tile you're on   ///////////////////////////////
 
 
-        public void tileCheck (int boardTile, Character hero){
+        public void tileCheck (int boardTile, Character hero, ArrayList<Tile> board){
 
             Tile tile = board.get(boardTile);
 
             if (tile instanceof BonusTile) {
                 Item item = ((BonusTile) tile).getItem();
                 System.out.println("You arrived on a bonus tile ! You open the chest and received a " + item.getName());
-                getItemEffect(hero, item);
+                ((BonusTile) tile).getItemEffect(hero, item);
                 hero.gainXP(40);
                 board.set(boardTile, new EmptyTile(boardTile));
 
@@ -186,14 +135,14 @@ public class Game {
                     board.set(boardTile, new EmptyTile(boardTile));
                 }
                 else {
-                    fightMonster(hero, enemy);
+                    fightMonster(hero, enemy, board);
                 }
 
             } else {
                 System.out.println("You arrived on a empty room. Nothing will happen for now and you can rest...");
                 hero.gainXP(25);
                 int dice = throwDice();
-                getEmptyTileEvent(dice, hero);
+                getEmptyTileEvent(hero);
 
             }
 
@@ -203,7 +152,7 @@ public class Game {
         ////////////////////////////////////////////////// Character moves //////////////////////////////////////
 
 
-        public void playATurn (Character hero){
+        public void playATurn (Character hero, ArrayList<Tile> board){
             int dice = throwDice();
             boardTile = getMoving(boardTile, dice);
             try {
@@ -214,7 +163,7 @@ public class Game {
             }
 
             System.out.println("You roll the dices. They fall on " + dice +  " ! You go to the tile " + boardTile);
-            tileCheck(boardTile, hero);
+            tileCheck(boardTile, hero, board);
             if (hero.getCharacterXP() >= hero.getLevelXP()) {
                 levelUp(hero);
             }
@@ -286,16 +235,12 @@ public class Game {
             }
         }
 
-        public void testCollections () {
-             boardSetup();
-            System.out.println(board);
-        }
+
 
 
         @Override
         public String toString () {
             return "Game{" +
-                    "board=" + board +
                     ", boardTile=" + boardTile +
                     '}';
         }

@@ -1,0 +1,11 @@
+package fr.campus.dnd.game.environment;
+
+public class Castle extends Field implements FieldGeneration{
+    // /////////////////////  Attributes  //////////////////////// //
+    // /////////////////////  Constructors  ///////////////////// //
+    public Castle() {
+        this.setFieldName("Castle");
+    }
+    // /////////////////////  Getters/Setters  ///////////////////// //
+    // /////////////////////  Methods  ///////////////////// //
+}

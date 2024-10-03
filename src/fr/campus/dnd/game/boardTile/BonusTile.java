@@ -1,5 +1,9 @@
 package fr.campus.dnd.game.boardTile;
 
+import fr.campus.dnd.game.characters.Character;
+import fr.campus.dnd.game.characters.Hunter;
+import fr.campus.dnd.game.characters.Magician;
+import fr.campus.dnd.game.characters.Warrior;
 import fr.campus.dnd.game.items.consumable.BigPotion;
 import fr.campus.dnd.game.items.consumable.Potion;
 import fr.campus.dnd.game.items.consumable.SmallPotion;
@@ -47,5 +51,24 @@ public class BonusTile extends Tile {
             default -> bonusItem;
         };
         return bonusItem;
+    }
+    public void getItemEffect(Character hero, Item item) {
+        if (item instanceof Potion) {
+            hero.regenHP((Potion) item);
+        }
+        if (item instanceof OffensiveWeapon){
+            if (item instanceof Spell && hero instanceof Magician){
+                hero.switchOffensiveWeapon((Spell) item);
+            }
+            else if (item instanceof Weapon && hero instanceof Warrior){
+                hero.switchOffensiveWeapon((Weapon) item);
+            }
+            else if (item instanceof Bow && hero instanceof Hunter){
+                hero.switchOffensiveWeapon((Bow) item);
+            }
+            else {
+                System.out.println("This equipment is not suitable for your class ! You throw it angrily to the ground and continue your journey !");
+            }
+        }
     }
 }

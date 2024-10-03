@@ -1,0 +1,11 @@
+package fr.campus.dnd.game.environment;
+
+public class Forest extends Field implements FieldGeneration{
+    // /////////////////////  Attributes  //////////////////////// //
+    // /////////////////////  Constructors  ///////////////////// //
+    public Forest() {
+        this.setFieldName("Forest");
+    }
+    // /////////////////////  Getters/Setters  ///////////////////// //
+    // /////////////////////  Methods  ///////////////////// //
+}
