@@ -206,6 +206,13 @@ public class Game {
         public void playATurn (Character hero){
             int dice = throwDice();
             boardTile = getMoving(boardTile, dice);
+            try {
+                outOfBounds();
+            } catch (PersonnageHorsPlateauException e) {
+                System.out.println("You arrived at the end of the dungeon ! Congrats you're not a noob :)");
+                System.exit(0);
+            }
+
             System.out.println("You roll the dices. They fall on " + dice +  " ! You go to the tile " + boardTile);
             tileCheck(boardTile, hero);
             if (hero.getCharacterXP() >= hero.getLevelXP()) {
@@ -240,7 +247,7 @@ public class Game {
          * @throws PersonnageHorsPlateauException
          */
         public void outOfBounds () throws PersonnageHorsPlateauException {
-            if (boardTile > 64) {
+            if (boardTile >= 64) {
                 throw new PersonnageHorsPlateauException("Vous sortez du plateau !");
             }
         }

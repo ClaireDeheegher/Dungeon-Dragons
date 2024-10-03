@@ -42,7 +42,8 @@ public class Menu {
 
         System.out.println("Write your name hero.");
         String name = characterInput.nextLine();
-        Character character = null;
+
+        Character character;
         System.out.println("There's 3 jobs available for you : warrior(1), magician(2) or hunter(3). Put the corresponding number to get your job");
         String job = characterInput.nextLine();
             switch (job){
@@ -63,9 +64,9 @@ public class Menu {
                     break;
                 default:
                     System.out.println("Sorry, that is not a valid option!");
+                    character =createCharacter();
             }
-        assert character != null;
-        character.showCharacter();
+
         return character;
     }
     public void continueMenu(Character character) {

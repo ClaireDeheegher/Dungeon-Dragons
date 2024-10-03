@@ -21,19 +21,13 @@ public class Main {
 
         menu.startMenu();
         Character character = menu.createCharacter();
+        character.showCharacter();
         game.boardSetup();
 
         /////////////////////////////// Playing the game until the end or death //////////////////////////////////////////
         while(character.getLifePoints()>0) {
 
             game.playATurn(character);
-            try {
-                game.outOfBounds();
-            }
-            catch(PersonnageHorsPlateauException e) {
-                System.out.println("You arrived at the end of the dungeon ! Congrats you're not a noob :)");
-                break;
-            }
             menu.continueMenu(character);
         }
 
