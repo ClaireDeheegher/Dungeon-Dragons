@@ -149,12 +149,7 @@ public abstract class Character {
         lifePoints+= potion.getRegenHP();
         System.out.println("Tou drank the "+potion.getName()+" ! You gain "+potion.getRegenHP()+" HP !");
     }
-    public void playerAttack (Enemy monster, int damages){
-        int monsterHP = monster.getEnemyHealth();
-        monsterHP -= damages;
-        monster.setEnemyHealth(monsterHP);
 
-        }
     public int calculateDamages(int bonusDamage){
         int max =6;
         int min = 1;

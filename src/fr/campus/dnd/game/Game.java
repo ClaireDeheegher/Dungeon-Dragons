@@ -105,8 +105,9 @@ public class Game {
         Scanner input = new Scanner(System.in);
         int bonusDamage = 0;
         int damages=0;
+        int monsterLife = monster.getEnemyHealth();
 
-        while (hero.getLifePoints()>0 && monster.getEnemyHealth()>0 && !choice.equals("runaway")) {
+        while (hero.getLifePoints()>0 && monsterLife>0 && !choice.equals("runaway")) {
             System.out.println("Do you want to fight ? or runaway?");
             choice = input.nextLine();
             switch (choice) {
@@ -116,9 +117,11 @@ public class Game {
                 case "fight" :
                     bonusDamage = hero.generateBonusDamage(monster);
                     damages = hero.calculateDamages(bonusDamage);
-                    hero.playerAttack(monster, bonusDamage);
-                    if (monster.getEnemyHealth()<=0){
+                    monsterLife = dealDamages(monsterLife,damages);
+
+                    if (monsterLife<=0){
                         hero.gainXP(monster.getXp());
+
                         System.out.println("You inflicted "+damages+" damages. The "+monster.getEnemyName()+" is defeated ! You gained "+monster.getXp()+" xp !" );
                         board.set(boardTile, new EmptyTile(boardTile));
                         break;
@@ -127,7 +130,7 @@ public class Game {
                         System.out.println("You tripped and failed to touch the "+monster.getEnemyName()+" ! You inflicted no damages...");
                     }
                     else {
-                        System.out.println("You inflicted "+damages+" damage to your opponent ! It still has "+monster.getEnemyHealth()+" life points left.");
+                        System.out.println("You inflicted "+damages+" damage to your opponent ! It still has "+monsterLife+" life points left.");
                     }
 
                     hero.monsterAttack(monster);
@@ -141,6 +144,9 @@ public class Game {
 
         }
 
+    }
+    public int dealDamages (int health, int damages){
+        return health - damages;
     }
     ////////////////////////////////////////////// Initialize the board ///////////////////////////
 
