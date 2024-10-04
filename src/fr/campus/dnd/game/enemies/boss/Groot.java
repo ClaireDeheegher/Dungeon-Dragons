@@ -1,0 +1,16 @@
+package fr.campus.dnd.game.enemies.boss;
+
+public class Groot extends Boss {
+
+    // /////////////////////  Attributes  //////////////////////// //
+
+    // /////////////////////  Constructors  //////////////////////// //
+    public Groot() {
+        this.setName("Groot");
+        this.setHealth(138);
+        this.setDamage(23);
+    }
+    // /////////////////////  Getter/Setter  //////////////////////// //
+
+    // /////////////////////  Methods  //////////////////////// //
+}

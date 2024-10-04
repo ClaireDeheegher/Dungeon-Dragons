@@ -11,7 +11,7 @@ import fr.campus.dnd.game.characters.Character;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Field implements FieldGeneration{
+public class Biome implements FieldGeneration{
     // /////////////////////  Attributes  //////////////////////// //
 
     private ArrayList<Tile> board;
@@ -19,7 +19,7 @@ public class Field implements FieldGeneration{
 
     // /////////////////////  Constructors  ///////////////////// //
 
-    public Field() {}
+    public Biome() {}
 
 
 

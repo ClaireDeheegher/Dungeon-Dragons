@@ -1,6 +1,6 @@
 package fr.campus.dnd.game.environment;
 
-public class Castle extends Field implements FieldGeneration{
+public class Castle extends Biome implements FieldGeneration{
     // /////////////////////  Attributes  //////////////////////// //
     // /////////////////////  Constructors  ///////////////////// //
     public Castle() {

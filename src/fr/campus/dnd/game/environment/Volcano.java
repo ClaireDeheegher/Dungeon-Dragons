@@ -1,6 +1,6 @@
 package fr.campus.dnd.game.environment;
 
-public class Volcano extends Field implements FieldGeneration{
+public class Volcano extends Biome implements FieldGeneration{
     // /////////////////////  Attributes  //////////////////////// //
     // /////////////////////  Constructors  ///////////////////// //
     public Volcano() {

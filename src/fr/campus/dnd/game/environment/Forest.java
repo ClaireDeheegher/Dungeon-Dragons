@@ -1,6 +1,6 @@
 package fr.campus.dnd.game.environment;
 
-public class Forest extends Field implements FieldGeneration{
+public class Forest extends Biome implements FieldGeneration{
     // /////////////////////  Attributes  //////////////////////// //
     // /////////////////////  Constructors  ///////////////////// //
     public Forest() {

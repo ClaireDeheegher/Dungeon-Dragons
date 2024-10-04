@@ -1,6 +1,6 @@
 package fr.campus.dnd.game.environment;
 
-public class SnowMountain extends Field implements FieldGeneration{
+public class SnowMountain extends Biome implements FieldGeneration{
     // /////////////////////  Attributes  //////////////////////// //
     // /////////////////////  Constructors  ///////////////////// //
     public SnowMountain(){

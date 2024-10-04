@@ -1,12 +1,9 @@
 import fr.campus.dnd.game.boardTile.Tile;
 import fr.campus.dnd.game.characters.Character;
-import fr.campus.dnd.game.db.ConnectionDB;
-import fr.campus.dnd.game.environment.Field;
-import fr.campus.dnd.game.exceptions.PersonnageHorsPlateauException;
+import fr.campus.dnd.game.environment.Biome;
 import fr.campus.dnd.game.Menu;
 import fr.campus.dnd.game.Game;
 
-import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -18,7 +15,7 @@ public class Main {
 
         Game game = new Game();
         Menu menu = new Menu();
-        Field field = new Field();
+        Biome field = new Biome();
         ArrayList<Tile> board = field.generateBoard();;
 
 
