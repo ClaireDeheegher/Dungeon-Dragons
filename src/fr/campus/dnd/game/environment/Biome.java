@@ -53,6 +53,9 @@ public class Biome implements FieldGeneration{
             board.add(new EmptyTile());
         }
         Collections.shuffle(board);
+        for (int i = 0; i < 7; i++) {
+            board.add(new EmptyTile());
+        }
         return board;
     }
     @Override

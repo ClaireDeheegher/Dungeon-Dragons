@@ -11,7 +11,7 @@ public class Dragon extends Enemy implements IsFriend, BiomeBonus {
     public Dragon() {
         this.setEnemyName("Dragon");
         this.setEnemyHealth(15);
-        this.setEnemyDamage(4);
+        this.setDamage(4);
         this.setXp(150);
 
     }
@@ -31,11 +31,11 @@ public class Dragon extends Enemy implements IsFriend, BiomeBonus {
     public void getBonus(Biome biome) {
         switch (biome.getFieldName()){
             case "Volcano":
-                this.setEnemyDamage(19);
+                this.setDamage(19);
                 System.out.println("Careful ! The dragon gets more power from the lava in the volcano !");
                 break;
             case "SnowMountain" :
-                this.setEnemyDamage(11);
+                this.setDamage(11);
                 System.out.println("You don't know why the hell is a dragon here, but it's looking weaker than usual.");
                 break;
         }

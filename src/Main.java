@@ -28,9 +28,10 @@ public class Main {
 
 
         /////////////////////////////// Playing the game until the end or death //////////////////////////////////////////
+        field =menu.generateBiome();
         while(character.getLifePoints()>0) {
 
-            game.playATurn(character, board);
+            game.playATurn(character, board, field);
             menu.continueMenu(character);
         }
 

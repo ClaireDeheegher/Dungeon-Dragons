@@ -1,6 +1,8 @@
 package fr.campus.dnd.game.enemies.boss;
 
-public class Boss {
+import fr.campus.dnd.game.enemies.Enemy;
+
+public class Boss extends Enemy {
 
     // /////////////////////  Attributes  //////////////////////// //
 

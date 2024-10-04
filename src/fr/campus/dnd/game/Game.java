@@ -1,12 +1,8 @@
 package fr.campus.dnd.game;
 
-import fr.campus.dnd.game.characters.Hunter;
-import fr.campus.dnd.game.characters.Magician;
-import fr.campus.dnd.game.characters.Warrior;
-import fr.campus.dnd.game.enemies.Dragon;
 import fr.campus.dnd.game.enemies.Enemy;
-import fr.campus.dnd.game.enemies.Goblin;
-import fr.campus.dnd.game.enemies.Sorcerer;
+import fr.campus.dnd.game.enemies.boss.*;
+import fr.campus.dnd.game.environment.Biome;
 import fr.campus.dnd.game.exceptions.PersonnageHorsPlateauException;
 import fr.campus.dnd.game.items.Item;
 import fr.campus.dnd.game.boardTile.BonusTile;
@@ -14,11 +10,6 @@ import fr.campus.dnd.game.boardTile.EmptyTile;
 import fr.campus.dnd.game.boardTile.EnemyTile;
 import fr.campus.dnd.game.boardTile.Tile;
 import fr.campus.dnd.game.characters.Character;
-import fr.campus.dnd.game.items.consumable.Potion;
-import fr.campus.dnd.game.items.offensiveEquipment.Bow;
-import fr.campus.dnd.game.items.offensiveEquipment.OffensiveWeapon;
-import fr.campus.dnd.game.items.offensiveEquipment.Spell;
-import fr.campus.dnd.game.items.offensiveEquipment.Weapon;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -55,9 +46,6 @@ public class Game {
     }
 
 
-    public void getEmptyTileEvent(Character hero) {
-
-    }
     public void fightMonster(Character hero, Enemy monster, ArrayList<Tile> board){
 
         String choice ="";
@@ -97,7 +85,7 @@ public class Game {
                         System.out.println("The "+monster.getEnemyName()+" has defeated you..... Game over");
                         System.exit(0);
                     }
-                    System.out.println("The "+monster.getEnemyName()+ " has inflicted "+monster.getEnemyDamage()+" damage ! You still have "+hero.getLifePoints()+" life points left.");
+                    System.out.println("The "+monster.getEnemyName()+ " has inflicted "+monster.getDamage()+" damage ! You still have "+hero.getLifePoints()+" life points left.");
                     break;
             }
 
@@ -107,14 +95,53 @@ public class Game {
     public int dealDamages (int health, int damages){
         return health - damages;
     }
-    ////////////////////////////////////////////// Initialize the board ///////////////////////////
 
 
+    public void bossFight(Character hero, Biome biome){
+        int bonusDamage = 0;
+        int damages=0;
+        Boss boss = generateBoss(biome);
+        int bossHP = boss.getHealth();
+        while (hero.getLifePoints()>0 && bossHP>0) {
+            damages = hero.calculateDamages(bonusDamage);
+            bossHP = dealDamages(bossHP,damages);
+            if (bossHP<=0){
+                System.out.println("Congrats you succeeded in beating the game");
+                System.exit(0);
+            }
+            else if(damages ==0){
+                System.out.println("You tripped and failed to touch the "+boss.getName()+" ! You inflicted no damages...");
+            }
+            else {
+                System.out.println("You inflicted "+damages+" damage to your opponent ! It still has "+bossHP+" life points left.");
+            }
 
+            hero.monsterAttack(boss);
+            if (hero.getLifePoints()<=0){
+                System.out.println("The "+boss.getEnemyName()+" has defeated you..... Game over");
+                System.exit(0);
+            }
+            System.out.println("The "+boss.getName()+ " has inflicted "+boss.getDamage()+" damage ! You still have "+hero.getLifePoints()+" life points left.");
+
+        }
+
+        
+    }
+    public Boss generateBoss (Biome biome){
+        Boss boss =new Boss();
+        switch (biome.getClass().getSimpleName()) {
+            case "Castle" ->boss= new LichKing();
+            case "Cave" -> boss=new Kraken();
+            case "Forest" -> boss=new Groot();
+            case "SnowMountain" -> boss=new Fenrir();
+            case "Volcano" -> boss=new Phoenix();
+        }
+        return boss;
+    }
         ////////////////////////////////////////////  How to know the tile you're on   ///////////////////////////////
 
 
-        public void tileCheck (int boardTile, Character hero, ArrayList<Tile> board){
+        public void tileCheck (int boardTile, Character hero, ArrayList<Tile> board, Biome biome){
 
             Tile tile = board.get(boardTile);
 
@@ -142,7 +169,7 @@ public class Game {
                 System.out.println("You arrived on a empty room. Nothing will happen for now and you can rest...");
                 hero.gainXP(25);
                 int dice = throwDice();
-                getEmptyTileEvent(hero);
+                biome.tileEvent(hero);
 
             }
 
@@ -152,18 +179,14 @@ public class Game {
         ////////////////////////////////////////////////// Character moves //////////////////////////////////////
 
 
-        public void playATurn (Character hero, ArrayList<Tile> board){
+        public void playATurn (Character hero, ArrayList<Tile> board, Biome biome){
             int dice = throwDice();
             boardTile = getMoving(boardTile, dice);
-            try {
-                outOfBounds();
-            } catch (PersonnageHorsPlateauException e) {
-                System.out.println("You arrived at the end of the dungeon ! Congrats you're not a noob :)");
-                System.exit(0);
+            if (boardTile>=64){
+                bossFight(hero,biome);
             }
-
             System.out.println("You roll the dices. They fall on " + dice +  " ! You go to the tile " + boardTile);
-            tileCheck(boardTile, hero, board);
+            tileCheck(boardTile, hero, board, biome);
             if (hero.getCharacterXP() >= hero.getLevelXP()) {
                 levelUp(hero);
             }

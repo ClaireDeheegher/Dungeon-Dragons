@@ -163,7 +163,7 @@ public abstract class Character {
     }
     public void monsterAttack(Enemy monster){
 
-        int monsterAtk = monster.getEnemyDamage();
+        int monsterAtk = monster.getDamage();
         lifePoints -= monsterAtk;
 
     }

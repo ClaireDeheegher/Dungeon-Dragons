@@ -10,7 +10,7 @@ public class Sorcerer extends Enemy implements IsFriend{
     public Sorcerer() {
         this.setEnemyName("Sorcerer");
         this.setEnemyHealth(9);
-        this.setEnemyDamage(2);
+        this.setDamage(2);
         this.setXp(85);
     }
 

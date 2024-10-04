@@ -9,7 +9,7 @@ public class Goblin extends Enemy implements IsFriend{
     public Goblin() {
         this.setEnemyName("Goblin");
         this.setEnemyHealth(6);
-        this.setEnemyDamage(1);
+        this.setDamage(1);
         this.setXp(50);
     }
 

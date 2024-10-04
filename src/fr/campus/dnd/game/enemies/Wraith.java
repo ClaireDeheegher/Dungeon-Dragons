@@ -9,7 +9,7 @@ public class Wraith extends Enemy implements IsFriend{
     public Wraith() {
         this.setEnemyName("Wraith");
         this.setEnemyHealth(15);
-        this.setEnemyDamage(5);
+        this.setDamage(5);
         this.setXp(100);
 
     }
@@ -25,7 +25,7 @@ public class Wraith extends Enemy implements IsFriend{
     public void getBonus(Biome biome) {
         switch (biome.getFieldName()){
             case "Castle":
-                this.setEnemyDamage(9);
+                this.setDamage(9);
                 System.out.println("Careful ! The wraith looks more ominous than usual");
                 break;
         }

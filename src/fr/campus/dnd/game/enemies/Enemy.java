@@ -1,6 +1,5 @@
 package fr.campus.dnd.game.enemies;
 
-import java.util.ArrayList;
 import fr.campus.dnd.game.characters.Character;
 import fr.campus.dnd.game.environment.Biome;
 
@@ -29,7 +28,7 @@ public class Enemy implements IsFriend, BiomeBonus{
     public int getEnemyHealth() {
         return enemyHealth;
     }
-    public int getEnemyDamage() {
+    public int getDamage() {
         return enemyDamage;
     }
     public String getBiome() {return biome;}
@@ -46,7 +45,7 @@ public class Enemy implements IsFriend, BiomeBonus{
     public void setEnemyHealth(int enemyHealth) {
         this.enemyHealth = enemyHealth;
     }
-    public void setEnemyDamage(int enemyDamage) {
+    public void setDamage(int enemyDamage) {
         this.enemyDamage = enemyDamage;
     }
     public void setBiome(String biome) {this.biome = biome;}
